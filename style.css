@@ -1,0 +1,195 @@
+body {
+  background-color: #F3F4F2;
+  font-family: 'Arial','Helvetica',sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 10px;
+  margin-top: 0;
+  text-align: center;
+}
+
+div.container {
+  background-color: #FFF;
+  width: 940px;
+  padding: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  margin: 15px auto;
+  overflow: auto;
+}
+
+h1#splitTingLogo {
+  width: 247px;
+  height: 80px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 0;
+  line-height: 0;
+  background: url(splitTing_logo.png) top center no-repeat;
+}
+
+h3#slogan {
+  color: #00A2E3;
+  margin-top: 10px;
+}
+
+p {
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.section_header {
+  border-bottom: 1px solid #A6C9EE;
+  text-align: left;
+}
+
+.input_box {
+  border: 1px solid #DEF6FF;
+  float: left;
+  width: 29.33%;
+  margin: 10px 7px;
+  display: inline-block;
+  padding: 15px 20px;
+  background-color: #E8F6FF;
+  padding: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+input {
+  outline: none;
+}
+input[type=file] {
+  width: 83%;
+  margin: 0 auto;
+  outline: none;
+  display: block;
+}
+
+.total {
+  border-top: 1px solid #A6C9EE;
+  padding: 4px 0;
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  display: none;
+  width: 100%;
+}
+.total tr td {
+  padding: 4px 0px;
+}
+.total thead tr:first-child th:nth-child(1),
+.total tbody tr td:nth-child(1) {
+  width: 100px;
+  text-align: left;
+}
+.total thead tr:first-child th:nth-child(2),
+.total tbody tr td:nth-child(2) {
+  width: 100px;
+  text-align: right;
+}
+
+#finalBillTotalContainer {
+  display: none;
+}
+
+.ting_button {
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -ms-border-radius: 20px;
+  border-radius: 20px;
+  padding: 8px 15px;
+  background: #00A2E3;
+  color: #FFF;
+  font-weight: normal;
+  font-size: 16px;
+  font-family: 'ProximaNovaRegular','Arial',sans-serif;
+  text-transform: none;
+  border: 0;
+  cursor: pointer;
+  line-height: 1;
+}
+.ting_button:hover {
+  background: #303030;
+}
+
+a#additional_tip {
+  background-color: #3061AB;
+  color: #fff;
+}
+.tipsy { font-size: 13px; position: absolute; padding: 5px; z-index: 100000; line-height: 15px; }
+  .tipsy-inner { background-color: #C2F5FF; color: #0C487E; max-width: 200px; padding: 5px 8px 4px 8px; text-align: center; }
+
+  /* Rounded corners */
+  .tipsy-inner { border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+  
+  /* Uncomment for shadow */
+  /*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
+  
+  .tipsy-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000; }
+  
+  /* Rules to colour arrows */
+  .tipsy-arrow-n { border-bottom-color: #000; }
+  .tipsy-arrow-s { border-top-color: #000; }
+  .tipsy-arrow-e { border-left-color: #000; }
+  .tipsy-arrow-w { border-right-color: #000; }
+  
+	.tipsy-n .tipsy-arrow { top: 0px; left: 50%; margin-left: -5px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent; }
+    .tipsy-nw .tipsy-arrow { top: 0; left: 10px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;}
+    .tipsy-ne .tipsy-arrow { top: 0; right: 10px; border-bottom-style: solid; border-top: none;  border-left-color: transparent; border-right-color: transparent;}
+  .tipsy-s .tipsy-arrow { bottom: 0; left: 50%; margin-left: -5px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
+    .tipsy-sw .tipsy-arrow { bottom: 0; left: 10px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
+    .tipsy-se .tipsy-arrow { bottom: 0; right: 10px; border-top-style: solid; border-bottom: none; border-left-color: transparent; border-right-color: transparent; }
+  .tipsy-e .tipsy-arrow { right: 0; top: 50%; margin-top: -5px; border-left-style: solid; border-right: none; border-top-color: transparent; border-bottom-color: transparent; }
+  .tipsy-w .tipsy-arrow { left: 0; top: 50%; margin-top: -5px; border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent; }
+  
+.billContainer {
+  padding: 15px 5px;
+  border-bottom: 1px solid #E0E0E0;
+  margin: 3px 0;
+  font-weight: bold;
+  font-size: 14px;
+}
+.billContainer .billTotal {
+  font-weight: bold;
+}
+.billContainer span.billType {
+  display: inline-block;
+  width: 150px;
+}
+.billContainer span.billTotal, span.billContainerTotal {
+  float: right;
+}
+.billContainer .overageBill {
+  clear: both;
+  display: block;
+  margin-left: 160px;
+  font-weight: normal;
+}
+.billTable h3#taxesHeadline {
+  text-align: left;
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 10px;
+  font-size: 16px;
+}
+.billTable #taxes_input {
+  float: right;
+}
+.billTable .subTotal {
+  float: right;
+  font-weight: bold;
+  font-size: 14px;
+}
+.billTable .subTotal .subTotalPrice {
+  display: inline-block;
+  width: 80px;
+  text-align: right;
+}
+#calculate_button {
+  display: block;
+  clear: both;
+  float: right;
+}

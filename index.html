@@ -1,0 +1,107 @@
+<!doctype html>
+
+<html>
+<head>
+<meta charset="utf-8" />
+<title>SplitTing App</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+  <h1 id="splitTingLogo">SplitTing</h1>
+  <h3 id="slogan">Split Your Ting Bill!</h3>
+  <div class="container">
+    <p>From your dashboard in Ting.com, go to 'Bills', select a 'Monthly Usage' and download the .csv files for each category. Upload each file to the respective section below. You can also add Taxes & Regulatory Fees at the bottom to split as well, click Calculate and your bill will be split!</p>
+    <p>If you're worried about security and sharing your information in this form, not to worry. The calculations are all done on the browser without saving any data or sending anything across to any servers.</p>
+    <p><strong>12/12:</strong> Major changes in this latest change. Better handling of the calculations in the billing total, and a more familiar structure on the bill form. Device charge was initially automatically added in the calculations, but due to the fact that adding/removing numbers and the fact that Ting changed the Device billing structure around June 2013 means this will now need to be added in manually by the user. If your bill is older than June, you may see that there are two rows for Devices, one for a Device charge and another row just before Taxes &amp; Regulatory Fees for Active Devices. You will need to add those two together to put in the Device Charge field below. Anything newer than June 2013, the Device Charge rows are now one row in your bill.</p>
+    <p>If any errors do pop up, or if you have any feature requests, you can email to <a href="mailto:split.ting.app@gmail.com">split.ting.app@gmail.com</a></p>
+  </div>
+  <div class="container">
+    <div class="input_box">
+      <h4 class="section_header">Minutes</h4>
+      <input class="ting_button" type="file" id="minutes_file" name="files[]" multiple />
+      <table class="total" id="minutes_total">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="input_box">
+      <h4 class="section_header">Text Messages</h4>
+      <input class="ting_button" type="file" id="messages_file" name="files[]" multiple />
+      <table class="total" id="messages_total">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="input_box">
+      <h4 class="section_header">Megabytes</h4>
+      <input class="ting_button" type="file" id="megabytes_file" name="files[]" multiple />
+      <table class="total" id="megabytes_total">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="container">
+    <div class="billTable">
+      <div class="billContainer billContainerMinutes">
+        <span class="billType">Minutes</span>
+        <span class="billDescription">
+          You used <span class="billMinutes">###</span> so we charged you for the "<span class="billMinutesType">TYPE</span>" rate.<span class="billTotal billMinutesTotal">$###</span>
+          <span class="overageBillMinutes overageBill"></span>
+        </span>
+      </div>
+      <div class="billContainer billContainerMessages">
+        <span class="billType">Messages</span>
+        <span class="billDescription">
+          You used <span class="billMessages">###</span> so we charged you for the "<span class="billMessagesType">TYPE</span>" rate.<span class="billTotal billMessagesTotal">$###</span>
+          <span class="overageBillMessages overageBill"></span>
+        </span>
+      </div>
+      <div class="billContainer billContainerMegabytes">
+        <span class="billType">Megabytes</span>
+        <span class="billDescription">
+          You used <span class="billMegabytes">###</span> so we charged you for the "<span class="billMegabytesType">TYPE</span>" rate.<span class="billTotal billMegabytesTotal">$###</span>
+          <span class="overageBillMegabytes overageBill"></span>
+        </span>
+      </div>
+      <div class="billContainer billContainerDevices">
+        <span class="billType">Devices</span>
+        <span class="billDescription">Device charges for the past month</span>
+        <span class="billTotal billDevicesTotal">$<input name="additionalCharge" id="additional_charge" type="text"></span>
+      </div>
+      <br><br>
+      <h3 id="taxesHeadline">Taxes &amp; Regulatory Fees</h3>
+      <div class="billContainer">
+        <span class="billDescription">Federal, state and local taxes and regulatory fees we are required to collect</span>
+        <span id="taxes_input">$<input name="fees" id="tax_fees" type="text"></span>
+      </div>
+      <br><br>
+    </div><!-- .billTable -->
+    <input type="button" class="ting_button" id="calculate_button" value="Split the Bill!">
+    <br><br>
+    <div class="finalBillTotalContainer">
+      <table id="numbersFinalBillTotal">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="jquery.csv-0.71.min.js"></script>
+<script src="script.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-46188222-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>
