@@ -1,7 +1,9 @@
  $(document).ready(function() {
     phoneNumbers = {};
     billTotal = {};
+    usageArray = {};
     billTotalInitiate();
+    firstUsageInitiate();
     if(isAPIAvailable()) {
       $('#minutes_file').bind('change', function(evt){
         handleFile(evt, 'Minutes');
@@ -27,6 +29,22 @@
     billTotal['minutesTotal'] = 0;
     billTotal['messagesTotal'] = 0;
     billTotal['megabytesTotal'] = 0;
+  }
+  
+  function firstUsageInitiate(){
+    usageArray['firstMinute'] = Date.parse(new Date());
+    usageArray['firstMessage'] = Date.parse(new Date());
+    usageArray['firstMegabyte'] = Date.parse(new Date());
+    firstUsage = Date.parse(new Date());
+    newRates = Date.parse("February 04, 2014");
+  }
+  
+  function earliestUsage(){
+    for (i in usageArray) {
+        if(usageArray[i] < firstUsage) {
+          firstUsage = usageArray[i];
+        }
+    }
   }
 
   function isAPIAvailable() {
@@ -82,6 +100,9 @@
 
       $.each(data, function (index) {
         if(index > 0) {
+          if(index == 1) {
+            if(data[index][0] != ""){usageArray['firstMinute'] = Date.parse(data[index][0])};
+          }
           var number = data[index][4];
           if(typeof(number) !== 'undefined' && data[index][7] != '8558464389') {
             if (number in phoneNumbers && "minutes" in phoneNumbers[number]) {
@@ -109,6 +130,9 @@
 
       $.each(data, function (index) {
         if(index > 0) {
+          if(index == 1) {
+            if(data[index][0] != ""){usageArray['firstMessage'] = Date.parse(data[index][0])};
+          }
           var number = data[index][2];
           if(typeof(number) !== 'undefined') {
             if (number in phoneNumbers && "messages" in phoneNumbers[number]) {
@@ -136,6 +160,9 @@
 
       $.each(data, function (index) {
         if(index > 0) {
+          if(index == 1) {
+            if(data[index][0] != ""){usageArray['firstMegabyte'] = Date.parse(data[index][0])};
+          }        
           var number = data[index][1];
           if(typeof(number) !== 'undefined') {
             if (number in phoneNumbers && "megabytes" in phoneNumbers[number]) {
@@ -187,12 +214,16 @@
       messagesTotal += parseInt(phoneNumbers[number]['messages']); 
       megabytesTotal += parseFloat(phoneNumbers[number]['megabytes']); 
     }
+    
+    earliestUsage();
+    
     billTotal['megabytes'] = Math.ceil(Math.round((megabytesTotal * 100)/100));
     billTotal['messages'] = messagesTotal;
     billTotal['minutes'] = minutesTotal;
     updateMegabytesMessage(billTotal['megabytes']);
     updateMessagesMessage(billTotal['messages']);
     updateMinutesMessage(billTotal['minutes']);
+    
     
   }
 
@@ -245,34 +276,60 @@
         planType = '',
         minutesTotal = billTotal['minutes'],
         overageMinutes = 0;
-        
-    if (billTotal['minutes'] > 0 && billTotal['minutes'] < 106) {
-      minutesPrice = 3;
-      planType = 'Small';
-    } else if (billTotal['minutes'] > 105 && billTotal['minutes'] < 526 ) {
-      minutesPrice = 9;
-      planType = 'Medium';
-    } else if (billTotal['minutes'] > 525 && billTotal['minutes'] < 1051) {
-      minutesPrice = 18;
-      planType = 'Large';
-    } else if (billTotal['minutes'] > 1050 && billTotal['minutes'] < 2101) {
-      minutesPrice = 35;
-      planType = 'XL';
-    } else if (billTotal['minutes'] > 2100 && billTotal['minutes'] < 3001 ) {
-      minutesPrice = 52;
-      planType = 'XXL';
-    } else {
-      minutesPrice = 52;
-      planType = 'XXL';
-      extraMinutes = billTotal['minutes'] - 3000;
-      console.log('Extra Minutes: ' + extraMinutes);
-      extraMinutesPrice = extraMinutes * .02;
-      extraMinutesPrice = Math.round((extraMinutesPrice * 100))/100;
-      console.log('Extra Minutes Price: ' + extraMinutesPrice);
-      minutesTotal = 3000;
-      overageMinutes = parseInt(billTotal['minutes']) - parseInt(3000);
+    
+    if (firstUsage >= newRates){
+        if (billTotal['minutes'] > 0 && billTotal['minutes'] < 106) {
+          minutesPrice = 3;
+          planType = 'Small';
+        } else if (billTotal['minutes'] > 105 && billTotal['minutes'] < 526 ) {
+          minutesPrice = 9;
+          planType = 'Medium';
+        } else if (billTotal['minutes'] > 525 && billTotal['minutes'] < 1051) {
+          minutesPrice = 18;
+          planType = 'Large';
+        } else if (billTotal['minutes'] > 1050 && billTotal['minutes'] < 2101) {
+          minutesPrice = 35;
+          planType = 'XL';
+        } else {
+          minutesPrice = 35;
+          planType = 'XXL';
+          extraMinutes = billTotal['minutes'] - 2100;
+          console.log('Extra Minutes: ' + extraMinutes);
+          extraMinutesPrice = extraMinutes * .019;
+          extraMinutesPrice = Math.round((extraMinutesPrice * 100))/100;
+          console.log('Extra Minutes Price: ' + extraMinutesPrice);
+          minutesTotal = 2100;
+          overageMinutes = parseInt(billTotal['minutes']) - parseInt(2100);
+        }    
     }
-        
+    else {    
+        if (billTotal['minutes'] > 0 && billTotal['minutes'] < 106) {
+          minutesPrice = 3;
+          planType = 'Small';
+        } else if (billTotal['minutes'] > 105 && billTotal['minutes'] < 526 ) {
+          minutesPrice = 9;
+          planType = 'Medium';
+        } else if (billTotal['minutes'] > 525 && billTotal['minutes'] < 1051) {
+          minutesPrice = 18;
+          planType = 'Large';
+        } else if (billTotal['minutes'] > 1050 && billTotal['minutes'] < 2101) {
+          minutesPrice = 35;
+          planType = 'XL';
+        } else if (billTotal['minutes'] > 2100 && billTotal['minutes'] < 3001 ) {
+          minutesPrice = 52;
+          planType = 'XXL';
+        } else {
+          minutesPrice = 52;
+          planType = 'XXL';
+          extraMinutes = billTotal['minutes'] - 3000;
+          console.log('Extra Minutes: ' + extraMinutes);
+          extraMinutesPrice = extraMinutes * .02;
+          extraMinutesPrice = Math.round((extraMinutesPrice * 100))/100;
+          console.log('Extra Minutes Price: ' + extraMinutesPrice);
+          minutesTotal = 3000;
+          overageMinutes = parseInt(billTotal['minutes']) - parseInt(3000);
+        }
+    }    
     $('span.billMinutes').html(minutesTotal + ' minutes');
     $('span.billMinutesType').html(planType);
     if (overageMinutes > 0) {
@@ -292,33 +349,58 @@
         planType = ''
         messagesTotal = billTotal['messages'],
         overageMessages = 0;
-    
-    if (billTotal['messages'] > 0 && billTotal['messages'] < 106) {
-      messagesPrice = 3;
-      planType = 'Small';
-    } else if (billTotal['messages'] > 105 && billTotal['messages'] < 1051) {
-      messagesPrice = 5;
-      planType = 'Medium';
-    } else if (billTotal['messages'] > 1050 && billTotal['messages'] < 2101) {
-      messagesPrice = 8;
-      planType = 'Large';
-    } else if (billTotal['messages'] > 2100 && billTotal['messages'] < 4201) {
-      messagesPrice = 11;
-      planType = 'XL';
-    } else if (billTotal['messages'] > 4200 && billTotal['messages'] < 6001) {
-      messagesPrice = 14;
-      planType = 'XXL';
+
+    if (firstUsage >= newRates) {
+        if (billTotal['messages'] > 0 && billTotal['messages'] < 106) {
+          messagesPrice = 3;
+          planType = 'Small';
+        } else if (billTotal['messages'] > 105 && billTotal['messages'] < 1051) {
+          messagesPrice = 5;
+          planType = 'Medium';
+        } else if (billTotal['messages'] > 1050 && billTotal['messages'] < 2101) {
+          messagesPrice = 8;
+          planType = 'Large';
+        } else if (billTotal['messages'] > 2100 && billTotal['messages'] < 4801) {
+          messagesPrice = 11;
+          planType = 'XL';
+        } else {
+          messagesPrice = 11;
+          planType = 'XXL';
+          extraMessages = parseFloat(billTotal['messages']) - parseFloat(4800);
+          console.log('Extra Messages: ' + extraMessages);
+          extraMessagesPrice = extraMessages * .0025;
+          extraMessagesPrice = Math.round((extraMessagesPrice * 100))/100;
+          console.log('Extra Messages Price: ' + extraMessagesPrice);
+          overageMessages = parseInt(billTotal['messages']) - parseInt(4800);
+        }
     } else {
-      messagesPrice = 14;
-      planType = 'XXL';
-      extraMessages = parseFloat(billTotal['messages']) - parseFloat(6000);
-      console.log('Extra Messages: ' + extraMessages);
-      extraMessagesPrice = extraMessages * .0025;
-      extraMessagesPrice = Math.round((extraMessagesPrice * 100))/100;
-      console.log('Extra Messages Price: ' + extraMessagesPrice);
-      overageMessages = parseInt(billTotal['messages']) - parseInt(6000);
+        if (billTotal['messages'] > 0 && billTotal['messages'] < 106) {
+          messagesPrice = 3;
+          planType = 'Small';
+        } else if (billTotal['messages'] > 105 && billTotal['messages'] < 1051) {
+          messagesPrice = 5;
+          planType = 'Medium';
+        } else if (billTotal['messages'] > 1050 && billTotal['messages'] < 2101) {
+          messagesPrice = 8;
+          planType = 'Large';
+        } else if (billTotal['messages'] > 2100 && billTotal['messages'] < 4201) {
+          messagesPrice = 11;
+          planType = 'XL';
+        } else if (billTotal['messages'] > 4200 && billTotal['messages'] < 6001) {
+          messagesPrice = 14;
+          planType = 'XXL';
+        } else {
+          messagesPrice = 14;
+          planType = 'XXL';
+          extraMessages = parseFloat(billTotal['messages']) - parseFloat(6000);
+          console.log('Extra Messages: ' + extraMessages);
+          extraMessagesPrice = extraMessages * .0025;
+          extraMessagesPrice = Math.round((extraMessagesPrice * 100))/100;
+          console.log('Extra Messages Price: ' + extraMessagesPrice);
+          overageMessages = parseInt(billTotal['messages']) - parseInt(6000);
+        }
     }
-    
+        
     $('span.billMessages').html(messagesTotal + ' messages');
     $('span.billMessagesType').html(planType);
     if (overageMessages > 0) {
@@ -336,32 +418,58 @@
         planType = '',
         megabytesTotal = billTotal['megabytes'],
         overageMegabytes = 0;
-        
-    if (billTotal['megabytes'] > 0 && billTotal['megabytes'] < 106) {
-      megabytesPrice = 3;
-      planType = 'Small';
-    } else if (billTotal['megabytes'] > 105 && billTotal['megabytes'] < 526 ) {
-      megabytesPrice = 13;
-      planType = 'Medium';
-    } else if (billTotal['megabytes'] > 525 && billTotal['megabytes'] < 1051) {
-      megabytesPrice = 24;
-      planType = 'Large';
-    } else if (billTotal['megabytes'] > 1050 && billTotal['megabytes'] < 2101) {
-      megabytesPrice = 42;
-      planType = 'XL';
-    } else if (billTotal['megabytes'] > 2100 && billTotal['megabytes'] < 3001) {
-      megabytesPrice = 60;
-      planType = 'XXL';
-    } else {
-      megabytesPrice = 60;
-      planType = 'XXL';
-      extraMegabytes = parseFloat(billTotal['megabytes']) - parseFloat(3000);
-      console.log('Extra Megabytes: ' + extraMegabytes);
-      extraMegabytesPrice = extraMegabytes * .0225;
-      extraMegabytesPrice = Math.round((extraMegabytesPrice * 100))/100;
-      megabytesTotal = 3000;
-      overageMegabytes = parseInt(billTotal['megabytes']) - parseInt(3000);
-      console.log('Extra Megabytes Price: ' + extraMegabytesPrice);
+
+    if (firstUsage >= newRates){
+        if (billTotal['megabytes'] > 0 && billTotal['megabytes'] < 106) {
+          megabytesPrice = 3;
+          planType = 'Small';
+        } else if (billTotal['megabytes'] > 105 && billTotal['megabytes'] < 526 ) {
+          megabytesPrice = 13;
+          planType = 'Medium';
+        } else if (billTotal['megabytes'] > 525 && billTotal['megabytes'] < 1051) {
+          megabytesPrice = 24;
+          planType = 'Large';
+        } else if (billTotal['megabytes'] > 1050 && billTotal['megabytes'] < 2001) {
+          megabytesPrice = 29;
+          planType = 'XL';
+        } else {
+          megabytesPrice = 29;
+          planType = 'XXL';
+          extraMegabytes = parseFloat(billTotal['megabytes']) - parseFloat(2000);
+          console.log('Extra Megabytes: ' + extraMegabytes);
+          extraMegabytesPrice = extraMegabytes * .015;
+          extraMegabytesPrice = Math.round((extraMegabytesPrice * 100))/100;
+          megabytesTotal = 2000;
+          overageMegabytes = parseInt(billTotal['megabytes']) - parseInt(2000);
+          console.log('Extra Megabytes Price: ' + extraMegabytesPrice);
+        }    
+    } else {        
+        if (billTotal['megabytes'] > 0 && billTotal['megabytes'] < 106) {
+          megabytesPrice = 3;
+          planType = 'Small';
+        } else if (billTotal['megabytes'] > 105 && billTotal['megabytes'] < 526 ) {
+          megabytesPrice = 13;
+          planType = 'Medium';
+        } else if (billTotal['megabytes'] > 525 && billTotal['megabytes'] < 1051) {
+          megabytesPrice = 24;
+          planType = 'Large';
+        } else if (billTotal['megabytes'] > 1050 && billTotal['megabytes'] < 2101) {
+          megabytesPrice = 42;
+          planType = 'XL';
+        } else if (billTotal['megabytes'] > 2100 && billTotal['megabytes'] < 3001) {
+          megabytesPrice = 60;
+          planType = 'XXL';
+        } else {
+          megabytesPrice = 60;
+          planType = 'XXL';
+          extraMegabytes = parseFloat(billTotal['megabytes']) - parseFloat(3000);
+          console.log('Extra Megabytes: ' + extraMegabytes);
+          extraMegabytesPrice = extraMegabytes * .0225;
+          extraMegabytesPrice = Math.round((extraMegabytesPrice * 100))/100;
+          megabytesTotal = 3000;
+          overageMegabytes = parseInt(billTotal['megabytes']) - parseInt(3000);
+          console.log('Extra Megabytes Price: ' + extraMegabytesPrice);
+        }
     }
     
     $('span.billMegabytes').html(megabytesTotal + ' megabytes');
@@ -405,10 +513,23 @@
           numbersMessagesBill = 0,
           numbersMegabytesBill = 0;
       
+	if(billTotal['minutes']>0) {
       numbersMinutesBill = (phoneNumbers[number]['minutes'] / billTotal['minutes']) * billTotal['minutesTotal'];
+	} else {
+	  numbersMinutesBill = 0;
+	}
+	if(billTotal['messages']>0) {
       numbersMessagesBill = (phoneNumbers[number]['messages'] / billTotal['messages']) * billTotal['messagesTotal'];
+	} else {
+	  numbersMessagesBill = 0;
+	}
+    if(billTotal['megabytes']>0) {
       numbersMegabytesBill = (phoneNumbers[number]['megabytes'] / billTotal['megabytes']) * billTotal['megabytesTotal'];
-      phoneNumbers[number]['totalBill'] = parseFloat(numbersMinutesBill) + parseFloat(numbersMessagesBill) + parseFloat(numbersMegabytesBill);
+    } else {
+      numbersMegabytesBill = 0;
+    }
+    
+    phoneNumbers[number]['totalBill'] = parseFloat(numbersMinutesBill) + parseFloat(numbersMessagesBill) + parseFloat(numbersMegabytesBill);
       
       var html = '';
       var numberTotal = parseFloat(phoneNumbers[number]['totalBill']) + parseFloat(splitFees) + parseFloat(splitAdditionalFees);
