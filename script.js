@@ -424,10 +424,10 @@
           megabytesPrice = 3;
           planType = 'Small';
         } else if (billTotal['megabytes'] > 105 && billTotal['megabytes'] < 526 ) {
-          megabytesPrice = 13;
+          megabytesPrice = 12;
           planType = 'Medium';
         } else if (billTotal['megabytes'] > 525 && billTotal['megabytes'] < 1051) {
-          megabytesPrice = 24;
+          megabytesPrice = 19;
           planType = 'Large';
         } else if (billTotal['megabytes'] > 1050 && billTotal['megabytes'] < 2001) {
           megabytesPrice = 29;
@@ -540,4 +540,3 @@
       $('#finalBillTotalContainer').show();
     }
   }
-  
