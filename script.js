@@ -506,8 +506,8 @@
     var finalBillTotal = 0;
     finalBillTotal = parseFloat(billTotal['minutesTotal']) + parseFloat(billTotal['messagesTotal']) + parseFloat(billTotal['megabytesTotal']) + parseFloat(fees) + parseFloat(additionalFee);
     var finalHtml = '<tr><th>Final Bill Total</th><th>' + (Math.round(finalBillTotal * 100)/100) + '</th></tr>'; 
-    $('table#numbersFinalBillTotal > thead:last').append(finalHtml);
-    
+    $('table#numbersFinalBillTotal > thead:last').replaceWith(finalHtml);
+    $('table#numbersFinalBillTotal > tbody').html('');
     for (number in phoneNumbers) {
       var numbersMinutesBill = 0,
           numbersMessagesBill = 0,
