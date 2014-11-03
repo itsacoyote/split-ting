@@ -103,7 +103,7 @@
           if(index == 1) {
             if(data[index][0] != ""){usageArray['firstMinute'] = Date.parse(data[index][0])};
           }
-          var number = data[index][4];
+          var number = data[index][3];
           if(typeof(number) !== 'undefined' && data[index][7] != '8558464389') {
             if (number in phoneNumbers && "minutes" in phoneNumbers[number]) {
               phoneNumbers[number]['minutes'] = phoneNumbers[number]['minutes'] + parseInt(data[index][11]);
