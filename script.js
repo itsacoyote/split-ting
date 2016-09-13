@@ -91,28 +91,77 @@
     }
   }
 
+  /**
+   * sanitize a string to make it more machine friendly
+   */
+  function sanitizeString(str) {
+    var args = {
+      ' ':  '_',
+      "'":  '',
+      '/': '-',
+      '(': '',
+      ')': '',
+      '$': '',
+    };
+
+    for (var key in args) {
+      str = str.replace(key, args[key]);
+    }
+    return str.toLowerCase();
+  }
+
+  /**
+   * sanitize an array to make it more machine friendly
+   */
+  function sanitizeArray(arr) {
+    for (var i in arr) {
+      arr[i] = sanitizeString(arr[i]);
+    }
+    return arr;
+  }
+
+  /**
+   * read the CSV and make it an array of objects for easier processing when
+   * additional columns are added
+   */
+  function readCSV(csv) {
+    thisData = $.csv.toArrays(csv);
+
+    var data = [];
+    var headers = sanitizeArray(thisData[0]);
+    thisData.splice(0,1);
+    var thisRow = {};
+    for (var row in thisData) {
+      thisRow = {};
+      for (var column in thisData[row]) {
+        thisRow[headers[column]] = thisData[row][column];
+      }
+      data.push(thisRow);
+    }
+
+    return data;
+  }
+
   function calculateMinutes(file) {
     var reader = new FileReader();
     reader.readAsText(file);
     reader.onload = function(event){
       var csv = event.target.result;
-      var data = $.csv.toArrays(csv);
+      var data = readCSV(csv);
 
       $.each(data, function (index) {
-        if(index > 0) {
-          if(index == 1) {
-            if(data[index][0] != ""){usageArray['firstMinute'] = Date.parse(data[index][0])};
-          }
-          var number = data[index][3];
-          if(typeof(number) !== 'undefined' && data[index][7] != '8558464389') {
-            if (number in phoneNumbers && "minutes" in phoneNumbers[number]) {
-              phoneNumbers[number]['minutes'] = phoneNumbers[number]['minutes'] + parseInt(data[index][11]);
-            } else {
-              if (typeof(phoneNumbers[number]) === 'undefined') {
-                phoneNumbers[number] = {}; 
-              }
-              phoneNumbers[number]['minutes'] = parseInt(data[index][11]);
+        if(index == 1) {
+          if(data[index].date != ""){usageArray['firstMinute'] = Date.parse(data[index].date)};
+        }
+        var number = data[index].phone;
+        if(typeof(number) !== 'undefined' && data[index].partners_phone != '8558464389') {
+          if (number in phoneNumbers && "minutes" in phoneNumbers[number]) {
+            phoneNumbers[number]['minutes'] = phoneNumbers[number]['minutes'] + parseInt(data[index].duration_min);
+          } else {
+            if (typeof(phoneNumbers[number]) === 'undefined') {
+              phoneNumbers[number] = {};
             }
+            phoneNumbers[number]['minutes'] = parseInt(data[index].duration_min);
           }
         }
       });
@@ -126,23 +175,21 @@
     reader.readAsText(file);
     reader.onload = function(event){
       var csv = event.target.result;
-      var data = $.csv.toArrays(csv);
+      var data = readCSV(csv);
 
       $.each(data, function (index) {
-        if(index > 0) {
-          if(index == 1) {
-            if(data[index][0] != ""){usageArray['firstMessage'] = Date.parse(data[index][0])};
-          }
-          var number = data[index][2];
-          if(typeof(number) !== 'undefined') {
-            if (number in phoneNumbers && "messages" in phoneNumbers[number]) {
-              phoneNumbers[number]['messages'] += 1;
-            } else {
-              if (typeof(phoneNumbers[number]) === 'undefined') {
-                phoneNumbers[number] = {}; 
-              }
-              phoneNumbers[number]['messages'] = parseInt(1);
+        if(index == 1) {
+          if(data[index].date != ""){usageArray['firstMessage'] = Date.parse(data[index].date)};
+        }
+        var number = data[index].phone;
+        if(typeof(number) !== 'undefined') {
+          if (number in phoneNumbers && "messages" in phoneNumbers[number]) {
+            phoneNumbers[number]['messages'] += 1;
+          } else {
+            if (typeof(phoneNumbers[number]) === 'undefined') {
+              phoneNumbers[number] = {};
             }
+            phoneNumbers[number]['messages'] = parseInt(1);
           }
         }
       });
@@ -156,23 +203,21 @@
     reader.readAsText(file);
     reader.onload = function(event){
       var csv = event.target.result;
-      var data = $.csv.toArrays(csv);
+      var data = readCSV(csv);
 
       $.each(data, function (index) {
-        if(index > 0) {
-          if(index == 1) {
-            if(data[index][0] != ""){usageArray['firstMegabyte'] = Date.parse(data[index][0])};
-          }        
-          var number = data[index][1];
-          if(typeof(number) !== 'undefined') {
-            if (number in phoneNumbers && "megabytes" in phoneNumbers[number]) {
-              phoneNumbers[number]['megabytes'] = phoneNumbers[number]['megabytes'] + parseFloat(data[index][3]/1024);
-            } else {
-              if (typeof(phoneNumbers[number]) === 'undefined') {
-                phoneNumbers[number] = {}; 
-              }
-              phoneNumbers[number]['megabytes'] = parseFloat(data[index][3]/1024);
+        if(index == 1) {
+          if(data[index].date != ""){usageArray['firstMegabyte'] = Date.parse(data[index].date)};
+        }
+        var number = data[index].device;
+        if(typeof(number) !== 'undefined') {
+          if (number in phoneNumbers && "megabytes" in phoneNumbers[number]) {
+            phoneNumbers[number]['megabytes'] = phoneNumbers[number]['megabytes'] + parseFloat(data[index].kilobytes/1024);
+          } else {
+            if (typeof(phoneNumbers[number]) === 'undefined') {
+              phoneNumbers[number] = {};
             }
+            phoneNumbers[number]['megabytes'] = parseFloat(data[index].kilobytes/1024);
           }
         }
       });
