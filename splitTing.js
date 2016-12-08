@@ -32,22 +32,19 @@ SplitTing.prototype.buildUsers = function (file, type) {
 
     fileReader.onload = function (event) {
         var csv = event.target.result;
-        var data = $.csv.toArrays(csv);
+        var data = $.csv.toObjects(csv);
         
         _.each(data, function (row, index) {
             if (index > 0) {
                 switch (type) {
                     case 'minutes':
-                        number = data[index][3];
-                        nickname = data[index][4];
-                        break;
                     case 'messages':
-                        number = data[index][2];
-                        nickname = data[index][3];
+                        number = row['Phone'];
+                        nickname = row['Nickname'];
                         break;
                     case 'megabytes':
-                        number = data[index][1];
-                        nickname = data[index][2];
+                        number = row['Device'];
+                        nickname = row['Nickname'];
                 }
 
                 if (typeof (phoneNumbers[number]) === 'undefined') {

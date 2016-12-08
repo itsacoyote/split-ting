@@ -11,19 +11,19 @@ Calculator.prototype.calcMinutes = function calcMinutes(file) {
 
     fileReader.onload = function (event) {
         var csv = event.target.result;
-        var data = $.csv.toArrays(csv);        
+        var data = $.csv.toObjects(csv);        
 
         _.each(data, function (row, index) {
             if (index > 0) {
-                var number = data[index][3];
-                var nickname = data[index][4];
-
-                if ( data[index][7] !== self.tingNumber || data[index][13] !== 'VM') {
-                    if (+data[index][12] > 0) {
-                        bill.calculateInternational(+data[index][11], +data[index][12]);
+                var number = row['Phone'];
+                var nickname = row['Nickname'];
+                
+                if ( row['Partner\'s Phone'] !== self.tingNumber || row['Features'] !== 'VM') {
+                    if (+row['Surcharges ($)'] > 0) {
+                        bill.calculateInternational(+row['Duration (min)'], +row['Surcharges ($)']);
                     }
-                    minutes += +data[index][11];
-                    phoneNumbers[number].minutes += +data[index][11];
+                    minutes += +row['Duration (min)'];
+                    phoneNumbers[number].minutes += +row['Duration (min)'];
                 }
             }
         });
@@ -40,12 +40,12 @@ Calculator.prototype.calcMessages = function calcMessages(file) {
 
     fileReader.onload = function (event) {
         var csv = event.target.result;
-        var data = $.csv.toArrays(csv);
+        var data = $.csv.toObjects(csv);
 
         _.each(data, function (row, index) {
             if (index > 0) {
-                var number = data[index][2];
-                var nickname = data[index][3];
+                var number = row['Phone'];
+                var nickname = row['Nickname'];
 
                 messages += 1;
                 phoneNumbers[number].messages += 1;
@@ -64,16 +64,16 @@ Calculator.prototype.calcMegabytes = function calcMegabytes(file) {
 
     fileReader.onload = function (event) {
         var csv = event.target.result;
-        var data = $.csv.toArrays(csv);
+        var data = $.csv.toObjects(csv);
 
         _.each(data, function (row, index) {
             if (index > 0) {
-                var number = data[index][1];
-                var nickname = data[index][2];
+                var number = row['Device'];
+                var nickname = row['Nickname'];
 
-                kilobytes += +data[index][4];  
+                kilobytes += +row['Kilobytes'];  
 
-                phoneNumbers[number].kilobytes += +data[index][4];
+                phoneNumbers[number].kilobytes += +row['Kilobytes'];
             }
         });        
 
