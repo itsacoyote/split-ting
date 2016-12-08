@@ -13,7 +13,7 @@
   <div class="container">
     <p>From your dashboard in Ting.com, go to 'Billing History', select a 'Bill - Monthly Usage' and download the .csv files for each category. Upload each file to the respective section below. You can also add Devices and Taxes & Regulatory Fees at the bottom to split as well, click 'Split the Bill!' and your bill will be split!</p>
     <p>If you're worried about security and sharing your information in this form, not to worry. The calculations are all done on the browser without saving any data or sending anything across to any servers.</p>
-    <p><strong>Feb 2015:</strong> Hooray! The app has been updated! Months ago Ting slightly adjusted the output of the bill files which broke part of the app, specifically the Megabytes. I've fixed it so that going forward from that moment, the app splits all buckets properly. Even better, I overhauled the calculations so you shouldn't find any missing or extraneous pennies to the split!<br>Unfortunately, the app will likely not work for older bills (maybe six months back), I may try and get to that later.</p>
+    <p><strong>December 2016:</strong> It's been a long time coming, but the app has finally updated! It's a whole new re-write with improvements fixing old bugs and easier to maintain code for future updates. As of the moment, it will only be able to calculate bill splits using the most recent pricing plans, I will have to look into implementing older pricing plans as a possibility. If this is highly needed, email me to let me know!<br />Outside of all of that, I do not use Ting personally frequently enough to have various bill data to thoroughly test the latest changes. Testing will slowly progress to ensure that the calculations are working correctly for all parts of the bill splitting. If you have bills you'd be willing to share that have things like XL+ for Minutes/Messages/Megabytes or international surcharges, I would love to use them for tests. Any personal data will not be shared publicly except to personally validate the app. Please email me!</p>
     <p>If any errors do pop up, or if you have any feature requests, you can email to <a href="mailto:split.ting.app@gmail.com">split.ting.app@gmail.com</a></p>
   </div>
   <div class="container">
@@ -63,7 +63,7 @@
           Device charges for the past month <a href="#" class="tiply" id="devices_tip" original-title="Devices calculation may not always be exactly $6/device, hence the manual addition">&nbsp;?&nbsp;</a>
         </div>
         <div class="billColumn colTotal">
-          <span class="billTotal billDevicesTotal">$<input name="additionalCharge" id="additional_charge" type="text"></span>
+          <span class="billTotal billDevicesTotal">$<input name="additionalCharge" id="additional_charge" type="text" value="1"></span>
         </div>
       </div>
       <div class="billRow extrasRow">

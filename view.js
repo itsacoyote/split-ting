@@ -122,7 +122,7 @@ view.hideFileUploader = function () {
 };
 
 view.getDeviceCount = function () {
-    return + $('#additional_charge').val();
+    return $('#additional_charge').val() !== '' ? +$('#additional_charge').val() : 1;
 };
 
 view.getFees = function () {

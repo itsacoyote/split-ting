@@ -1,5 +1,5 @@
 function Bill() {
-    this.lines = 0;
+    this.lines = 1;
 
     this.total = {
         taxes: 0,
