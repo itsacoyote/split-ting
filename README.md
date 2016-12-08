@@ -17,7 +17,5 @@ Currently the Megabytes calculations are off by very small numbers which can end
 Planned Features
 ----------------
 
-- Reset button to clear the form
-- Clearer understanding of number of devices being charged
-- Improved calculations and breakdown
+- potentially calculating older pricing plans
 

@@ -13,4 +13,13 @@ if (splitTing.isAPIAvailable()) {
         splitTing.calculateBill();
     });
 
+    $('#reset_button').bind('click', function () {
+        splitTing = new SplitTing();
+        bill = new Bill();
+        calculator = new Calculator();
+        phoneNumbers = {};
+
+        view.resetView();
+    });
+
 }

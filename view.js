@@ -184,3 +184,19 @@ view.splitTable = function () {
 
     return false;
 };
+
+view.resetView = function () {
+    $('.billColumn.type span').text('');
+    $('.billColumn.description > span').fadeOut();
+    $('#additional_charge').val('');
+    $('#ting_fees').val('');
+    $('.billColumn.totalTotal').html('');
+    $('#numbersFinalBillTotal tbody').html('');
+    $('.billSplit-container').fadeOut();
+    $('.billRow.extrasRow .colTotal').html('');
+    $('.billColumn .billTotal').fadeOut();
+
+    $("#bills_files").replaceWith($("#bills_files").val('').clone(true));
+
+    $('.input_box').slideDown();
+};
