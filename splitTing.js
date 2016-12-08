@@ -35,24 +35,22 @@ SplitTing.prototype.buildUsers = function (file, type) {
         var data = $.csv.toObjects(csv);
         
         _.each(data, function (row, index) {
-            if (index > 0) {
-                switch (type) {
-                    case 'minutes':
-                    case 'messages':
-                        number = row['Phone'];
-                        nickname = row['Nickname'];
-                        break;
-                    case 'megabytes':
-                        number = row['Device'];
-                        nickname = row['Nickname'];
-                }
+            switch (type) {
+                case 'minutes':
+                case 'messages':
+                    number = row['Phone'];
+                    nickname = row['Nickname'];
+                    break;
+                case 'megabytes':
+                    number = row['Device'];
+                    nickname = row['Nickname'];
+            }
 
-                if (typeof (phoneNumbers[number]) === 'undefined') {
-                    phoneNumbers[number] = new PhoneNumber({
-                        number: number, 
-                        nickname: nickname
-                    });
-                }
+            if (typeof (phoneNumbers[number]) === 'undefined') {
+                phoneNumbers[number] = new PhoneNumber({
+                    number: number, 
+                    nickname: nickname
+                });
             }
         });
     };

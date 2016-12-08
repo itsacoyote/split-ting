@@ -11,7 +11,7 @@ view.showMinutes = function () {
         .fadeIn();
 
     $('.billMinutesTotal')
-        .text('$ ' + bill.minutes.total.toFixed(2))
+        .text('$ ' + bill.minutes.plan.price.toFixed(2))
         .fadeIn();
 
     if (bill.minutes.plan.size === 'XL+') {
@@ -24,7 +24,7 @@ view.showMinutes = function () {
 
         var row2 = [
             '<span class="hidden">',
-                '$' + bill.minutes.overage.price,
+                '$' + bill.minutes.overage.price.toFixed(2),
             '</span>'
         ].join('');
 
@@ -44,7 +44,7 @@ view.showMinutes = function () {
 
         var row2 = [
             '<span>',
-                '$' + bill.international.total,
+                '$' + bill.international.total.toFixed(2),
             '</span>'
         ].join('');
 
@@ -67,7 +67,7 @@ view.showMegabytes = function () {
         .fadeIn();
 
     $('.billMegabytesTotal')
-        .text('$ ' + bill.megabytes.total.toFixed(2))
+        .text('$ ' + bill.megabytes.plan.price.toFixed(2))
         .fadeIn();
 
     if (bill.megabytes.plan.size === 'XL+') {
@@ -80,7 +80,7 @@ view.showMegabytes = function () {
 
         var row2 = [
             '<span class="hidden">',
-                '$' + bill.megabytes.overage.price,
+                '$' + bill.megabytes.overage.price.toFixed(2),
             '</span>'
         ].join('');
 
@@ -92,9 +92,18 @@ view.showMegabytes = function () {
 };
 
 view.showMessages = function () {
-    $('.billMessages').text(bill.messages.usage).parent().fadeIn();
-    $('.billMessagesType').text(bill.messages.plan.size).fadeIn();
-    $('.billMessagesTotal').text('$ ' + bill.messages.total.toFixed(2)).fadeIn();
+    $('.billMessages')
+        .text(bill.messages.usage)
+        .parent()
+        .fadeIn();
+
+    $('.billMessagesType')
+        .text(bill.messages.plan.size)
+        .fadeIn();
+
+    $('.billMessagesTotal')
+        .text('$ ' + bill.messages.plan.price.toFixed(2))
+        .fadeIn();
 
     if (bill.messages.plan.size === 'XL+') {
         var row1 = [
@@ -106,7 +115,7 @@ view.showMessages = function () {
 
         var row2 = [
             '<span class="hidden">',
-                '$' + bill.messages.overage.price,
+                '$' + bill.messages.overage.price.toFixed(2),
             '</span>'
         ].join('');
 

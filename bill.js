@@ -56,7 +56,7 @@ Bill.prototype.setLines = function(lines) {
 };
 
 Bill.prototype.setMinutes = function (minutes) {
-    var topPlan = tingPlans.messages.levels[3];
+    var topPlan = tingPlans.minutes.levels[3];
     
     if (minutes > topPlan) {
         this.minutes.usage = topPlan;
@@ -85,7 +85,7 @@ Bill.prototype.setMegabytes = function (kilobytes) {
     var topPlan = tingPlans.megabytes.levels[3];
     var megabytes = Math.ceil(kilobytes / 1024); 
     this.kilobytes = kilobytes;
-
+    
     if (megabytes > topPlan) {
         this.megabytes.usage = topPlan;
         this.megabytes.overage.usage = (megabytes - topPlan);
@@ -122,7 +122,7 @@ Bill.prototype.calculateMinutes = function () {
         this.minutes.plan.price = tingPlans.minutes.plans['XL'];
         this.minutes.overage.price = (this.minutes.overage.usage * tingPlans.minutes.plans['XXL']);
     }
-
+    console.log("TEST", this.minutes);
     this.minutes.total = this.minutes.plan.price + this.minutes.overage.price;
 
     view.showMinutes();
