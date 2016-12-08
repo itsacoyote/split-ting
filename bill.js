@@ -1,5 +1,5 @@
 function Bill() {
-    this.lines = 1;
+    this.deviceCharge = 0;
 
     this.total = {
         taxes: 0,
@@ -52,7 +52,7 @@ function Bill() {
 }
 
 Bill.prototype.setLines = function(lines) {
-    this.lines = lines;
+    this.deviceCharge = lines;
 };
 
 Bill.prototype.setMinutes = function (minutes) {
@@ -122,7 +122,7 @@ Bill.prototype.calculateMinutes = function () {
         this.minutes.plan.price = tingPlans.minutes.plans['XL'];
         this.minutes.overage.price = (this.minutes.overage.usage * tingPlans.minutes.plans['XXL']);
     }
-    console.log("TEST", this.minutes);
+    
     this.minutes.total = this.minutes.plan.price + this.minutes.overage.price;
 
     view.showMinutes();

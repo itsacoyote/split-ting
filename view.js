@@ -130,8 +130,8 @@ view.hideFileUploader = function () {
     $('.input_box').slideUp();
 };
 
-view.getDeviceCount = function () {
-    return $('#additional_charge').val() !== '' ? +$('#additional_charge').val() : 1;
+view.getDeviceCharge = function () {
+    return $('#additional_charge').val() !== '' ? +$('#additional_charge').val() : 0;
 };
 
 view.getFees = function () {

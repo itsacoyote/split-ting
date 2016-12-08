@@ -91,9 +91,10 @@ Calculator.prototype.calcPersonalBill = function (person) {
     var minutes = bill.minutes.total * percentMinutes;
     var messages = bill.messages.total * percentMessages;
     var megabytes = bill.megabytes.total * percentMegabytes;
+    var deviceCharge = bill.deviceCharge / _.size(phoneNumbers);
+    console.log('devices', _.size(phoneNumbers));
 
-    var taxes = bill.total.taxes / bill.lines;
-    var deviceCharge = 6;
+    var taxes = bill.total.taxes / _.size(phoneNumbers);
 
     return (minutes + messages + megabytes + taxes + deviceCharge).toFixed(3);
 };

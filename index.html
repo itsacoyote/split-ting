@@ -25,7 +25,8 @@
 
     <div class="billTable">
       <div class="billRow">
-        <div class="billColumn label"><span class="billMinutesType">TYPE</span> Minutes</div>
+        <div class="billColumn label">Minutes</div>
+        <div class="billColumn type"><span class="billMinutesType">TYPE</span></div>
         <div class="billColumn description">
           <span class="hidden">
             <span class="billMinutes">###</span> minutes used.
@@ -36,7 +37,8 @@
         </div>
       </div>
       <div class="billRow">
-        <div class="billColumn label"><span class="billMessagesType">TYPE</span> Messages</div>
+        <div class="billColumn label">Messages</div>
+        <div class="billColumn type"><span class="billMessagesType">TYPE</span></div>
         <div class="billColumn description">
           <span class="hidden">
             <span class="billMessages">###</span> messages used.
@@ -47,7 +49,8 @@
         </div>
       </div>
       <div class="billRow">
-        <div class="billColumn label"><span class="billMegabytesType">TYPE</span> Megabytes</div>
+        <div class="billColumn label">Megabytes</div>
+        <div class="billColumn type"><span class="billMegabytesType">TYPE</span></div>
         <div class="billColumn description">
           <span class="hidden">
             <span class="billMegabytes">###</span> megabytes used.
@@ -59,15 +62,17 @@
       </div>
       <div class="billRow">
         <div class="billColumn label">Devices</div>
+        <div class="billColumn type"></div>
         <div class="billColumn description">
           Device charges for the past month <a href="#" class="tiply" id="devices_tip" original-title="Devices calculation may not always be exactly $6/device, hence the manual addition">&nbsp;?&nbsp;</a>
         </div>
         <div class="billColumn colTotal">
-          <span class="billTotal billDevicesTotal">$<input name="additionalCharge" id="additional_charge" type="text" value="1"></span>
+          <span class="billTotal billDevicesTotal">$<input name="additionalCharge" id="additional_charge" type="text"></span>
         </div>
       </div>
       <div class="billRow extrasRow">
         <div class="billColumn label">Extras</div>
+        <div class="billColumn type"></div>
         <div class="billColumn description">
         </div>
         <div class="billColumn colTotal">

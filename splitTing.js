@@ -90,11 +90,11 @@ SplitTing.prototype.handleFile = function (evt) {
 };
 
 SplitTing.prototype.calculateBill = function () {
-    bill.setLines(view.getDeviceCount());
+    bill.setLines(view.getDeviceCharge());
 
     bill.total.taxes = view.getFees();
 
-    bill.total.plan = bill.minutes.total + bill.messages.total + bill.megabytes.total + (bill.lines * 6);
+    bill.total.plan = bill.minutes.total + bill.messages.total + bill.megabytes.total + bill.deviceCharge;
 
     view.displayTotal();
     view.splitTable();
