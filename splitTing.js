@@ -47,7 +47,7 @@ SplitTing.prototype.buildUsers = function (file, type) {
                         break;
                     case 'megabytes':
                         number = data[index][1];
-                        nickname = data[index][1];
+                        nickname = data[index][2];
                 }
 
                 if (typeof (phoneNumbers[number]) === 'undefined') {
@@ -90,16 +90,17 @@ SplitTing.prototype.handleFile = function (evt) {
     }, this);
 
     if (fileCount === 3) {
-        $('.input_box').slideUp();
+        view.hideFileUploader();        
     }
 };
 
 SplitTing.prototype.calculateBill = function () {
-    bill.setLines(+$('#additional_charge').val());
-    var taxes = +$('#ting_fees').val();
+    bill.setLines(view.getDeviceCount());
 
-    var planTotal = bill.minutes.total + bill.messages.total + bill.megabytes.total;
+    bill.total.taxes = view.getFees();
 
-    var billTotal = planTotal + taxes + (bill.lines * 6);
-    console.log('billTotal', billTotal);
+    bill.total.plan = bill.minutes.total + bill.messages.total + bill.megabytes.total + (bill.lines * 6);
+
+    view.displayTotal();
+    view.splitTable();
 };

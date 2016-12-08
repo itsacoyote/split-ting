@@ -60,7 +60,7 @@
       <div class="billRow">
         <div class="billColumn label">Devices</div>
         <div class="billColumn description">
-          Device charges for the past month <a href="#" id="devices_tip" original-title="Devices calculation may not always be exactly $6/device, hence the manual addition">&nbsp;?&nbsp;</a>
+          Device charges for the past month <a href="#" class="tiply" id="devices_tip" original-title="Devices calculation may not always be exactly $6/device, hence the manual addition">&nbsp;?&nbsp;</a>
         </div>
         <div class="billColumn colTotal">
           <span class="billTotal billDevicesTotal">$<input name="additionalCharge" id="additional_charge" type="text"></span>
@@ -109,8 +109,8 @@
               <th>Phone</th>
               <th>Minutes</th>
               <th>Messages</th>
-              <th>Megabytes</th>
-              <th>Bill</th>
+              <th>Megabytes <a href="#" class="tiply" original-title="MB in billing is rounded up from the decimal">&nbsp;?&nbsp;</a></th>
+              <th>Bill <a href="#" class="tiply" original-title="Three decimal points is the closest in accuracy to bill total">&nbsp;?&nbsp;</a></th>
             </tr>
           </thead>
           <tbody>
@@ -132,8 +132,8 @@
 <script src="tingPlans.js"></script>
 <script src="script.js"></script>
 <script type="text/javascript">
-  $('#devices_tip').tipsy({gravity: 's'});
-  $('#devices_tip').on('click', function(e){
+  $('.tiply').tipsy({gravity: 's'});
+  $('.tiply').on('click', function(e){
     event.preventDefault();
   });
 

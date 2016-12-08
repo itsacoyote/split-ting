@@ -1,5 +1,3 @@
-console.log('hello world');
-
 var splitTing = new SplitTing();
 var bill = new Bill();
 var calculator = new Calculator();

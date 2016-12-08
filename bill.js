@@ -1,5 +1,11 @@
 function Bill() {
     this.lines = 0;
+
+    this.total = {
+        taxes: 0,
+        plan: 0
+    }
+
     this.minutes = {
         usage: 0,
         plan: {
@@ -36,6 +42,8 @@ function Bill() {
         },
         total: 0
     };
+
+    this.kilobytes = 0;
 
     this.international = {
         usage: 0,
@@ -76,6 +84,7 @@ Bill.prototype.setMessages = function (messages) {
 Bill.prototype.setMegabytes = function (kilobytes) {
     var topPlan = tingPlans.megabytes.levels[3];
     var megabytes = Math.ceil(kilobytes / 1024); 
+    this.kilobytes = kilobytes;
 
     if (megabytes > topPlan) {
         this.megabytes.usage = topPlan;
@@ -165,7 +174,7 @@ Bill.prototype.calculateMegabytes = function () {
         this.megabytes.plan.size = 'XL+';
         this.megabytes.plan.price = tingPlans.megabytes.plans['XL'];
         var gigabytes = Math.ceil(this.megabytes.overage.usage / 1024);
-
+        
         this.megabytes.overage.price = (gigabytes * tingPlans.megabytes.plans['XXL']);
     }
 

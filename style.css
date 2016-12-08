@@ -279,7 +279,7 @@ input[type="text"] {
 #numbersFinalBillTotal tr {
   padding: 5px;
 }
-#devices_tip {
+.tiply {
   background-color: #b4e2e6;
   color: #0071cf;
   border-radius: 50%;
@@ -296,7 +296,7 @@ input[type="text"] {
 #numbersFinalBillTotal {
   margin: 0 auto;
   border-collapse: collapse;
-  width: 60%;
+  width: 85%;
 }
 #numbersFinalBillTotal tr td, #numbersFinalBillTotal tr th {
   border: 1px solid #aabdc8;

@@ -18,8 +18,7 @@ Calculator.prototype.calcMinutes = function calcMinutes(file) {
                 var number = data[index][3];
                 var nickname = data[index][4];
 
-                if (typeof (number) !== 'undefined' && 
-                    (data[index][7] !== self.tingNumber || data[index][13] !== 'VM')) {
+                if ( data[index][7] !== self.tingNumber || data[index][13] !== 'VM') {
                     if (+data[index][12] > 0) {
                         bill.calculateInternational(+data[index][11], +data[index][12]);
                     }
@@ -48,10 +47,8 @@ Calculator.prototype.calcMessages = function calcMessages(file) {
                 var number = data[index][2];
                 var nickname = data[index][3];
 
-                if (typeof (number) !== 'undefined') {
-                    messages += 1;
-                    phoneNumbers[number].messages += 1;
-                }
+                messages += 1;
+                phoneNumbers[number].messages += 1;
             }
         });
 
@@ -74,14 +71,35 @@ Calculator.prototype.calcMegabytes = function calcMegabytes(file) {
                 var number = data[index][1];
                 var nickname = data[index][2];
 
-                if (typeof (number) !== 'undefined') {
-                    kilobytes += +data[index][4];                    
-                }
+                kilobytes += +data[index][4];  
 
-                phoneNumbers[number].kilobytes = kilobytes;
+                phoneNumbers[number].kilobytes += +data[index][4];
             }
         });        
 
+        _.each(phoneNumbers, function(number) {
+            number.megabytes = number.kilobytes / 1024;
+        });
+
         bill.setMegabytes(kilobytes);
     };
+};
+
+Calculator.prototype.calcPersonalBill = function (person) {
+    //determine the percent usage of user for each type
+    var percentMinutes = person.minutes / (bill.minutes.usage + bill.minutes.overage.usage);
+
+    var percentMessages = person.messages / (bill.messages.usage + bill.messages.overage.usage);
+
+    var percentMegabytes = (person.kilobytes / bill.kilobytes);
+
+    //calculate user's part of the bill
+    var minutes = bill.minutes.total * percentMinutes;
+    var messages = bill.messages.total * percentMessages;
+    var megabytes = bill.megabytes.total * percentMegabytes;
+
+    var taxes = bill.total.taxes / bill.lines;
+    var deviceCharge = 6;
+
+    return (minutes + messages + megabytes + taxes + deviceCharge).toFixed(3);
 };
