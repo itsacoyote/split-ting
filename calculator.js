@@ -14,17 +14,15 @@ Calculator.prototype.calcMinutes = function calcMinutes(file) {
         var data = $.csv.toObjects(csv);        
 
         _.each(data, function (row, index) {
-            if (index > 0) {
-                var number = row['Phone'];
-                var nickname = row['Nickname'];
-                
-                if ( row['Partner\'s Phone'] !== self.tingNumber || row['Features'] !== 'VM') {
-                    if (+row['Surcharges ($)'] > 0) {
-                        bill.calculateInternational(+row['Duration (min)'], +row['Surcharges ($)']);
-                    }
-                    minutes += +row['Duration (min)'];
-                    phoneNumbers[number].minutes += +row['Duration (min)'];
+            var number = row['Phone'];
+            var nickname = row['Nickname'];
+            
+            if ( row['Partner\'s Phone'] !== self.tingNumber || row['Features'] !== 'VM') {
+                if (+row['Surcharges ($)'] > 0) {
+                    bill.calculateInternational(+row['Duration (min)'], +row['Surcharges ($)']);
                 }
+                minutes += +row['Duration (min)'];
+                phoneNumbers[number].minutes += +row['Duration (min)'];
             }
         });
 
@@ -43,13 +41,11 @@ Calculator.prototype.calcMessages = function calcMessages(file) {
         var data = $.csv.toObjects(csv);
 
         _.each(data, function (row, index) {
-            if (index > 0) {
-                var number = row['Phone'];
-                var nickname = row['Nickname'];
+            var number = row['Phone'];
+            var nickname = row['Nickname'];
 
-                messages += 1;
-                phoneNumbers[number].messages += 1;
-            }
+            messages += 1;
+            phoneNumbers[number].messages += 1;
         });
 
         bill.setMessages(messages);
@@ -67,14 +63,12 @@ Calculator.prototype.calcMegabytes = function calcMegabytes(file) {
         var data = $.csv.toObjects(csv);
 
         _.each(data, function (row, index) {
-            if (index > 0) {
-                var number = row['Device'];
-                var nickname = row['Nickname'];
+            var number = row['Device'];
+            var nickname = row['Nickname'];
 
-                kilobytes += +row['Kilobytes'];  
+            kilobytes += +row['Kilobytes'];  
 
-                phoneNumbers[number].kilobytes += +row['Kilobytes'];
-            }
+            phoneNumbers[number].kilobytes += +row['Kilobytes'];
         });        
 
         _.each(phoneNumbers, function(number) {

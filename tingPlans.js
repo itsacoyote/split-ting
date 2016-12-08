@@ -23,7 +23,7 @@ var tingPlans = {
     },
 
     megabytes: {
-        levels: [105, 525, 1051, 2000],
+        levels: [105, 525, 1051, 2048],
         plans: {
             S: 3,
             M: 10,
