@@ -2,6 +2,9 @@ body {
   background-color: #F3F4F2;
   font-family: 'Arial','Helvetica',sans-serif;
 }
+*, *:before, *:after {
+  box-sizing: border-box;
+}
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 10px;
   margin-top: 0;
@@ -35,6 +38,7 @@ h3#slogan {
   margin-top: 10px;
 }
 
+
 p {
   font-size: 13px;
   line-height: 16px;
@@ -47,10 +51,9 @@ p {
 
 .input_box {
   border: 1px solid #DEF6FF;
-  float: left;
-  width: 29.33%;
-  margin: 10px 7px;
-  display: inline-block;
+  width: 35%;
+  margin: 0 auto;
+  margin-bottom: 20px;
   padding: 15px 20px;
   background-color: #E8F6FF;
   padding: 10px;
@@ -58,6 +61,17 @@ p {
   -webkit-border-radius: 10px;
   -ms-border-radius: 10px;
   border-radius: 10px;
+}
+.input_box h4 {
+  color: #00789c;
+  text-align: center;
+}
+.input_box span {
+  display: block;
+  margin-bottom: 10px;
+  line-height: 18px;
+  font-size: 16px;
+  text-align: center;
 }
 input {
   outline: none;
@@ -125,18 +139,18 @@ a#additional_tip {
 
   /* Rounded corners */
   .tipsy-inner { border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
-  
+
   /* Uncomment for shadow */
   /*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
-  
+
   .tipsy-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000; }
-  
+
   /* Rules to colour arrows */
   .tipsy-arrow-n { border-bottom-color: #000; }
   .tipsy-arrow-s { border-top-color: #000; }
   .tipsy-arrow-e { border-left-color: #000; }
   .tipsy-arrow-w { border-right-color: #000; }
-  
+
 	.tipsy-n .tipsy-arrow { top: 0px; left: 50%; margin-left: -5px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent; }
     .tipsy-nw .tipsy-arrow { top: 0; left: 10px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;}
     .tipsy-ne .tipsy-arrow { top: 0; right: 10px; border-bottom-style: solid; border-top: none;  border-left-color: transparent; border-right-color: transparent;}
@@ -145,13 +159,14 @@ a#additional_tip {
     .tipsy-se .tipsy-arrow { bottom: 0; right: 10px; border-top-style: solid; border-bottom: none; border-left-color: transparent; border-right-color: transparent; }
   .tipsy-e .tipsy-arrow { right: 0; top: 50%; margin-top: -5px; border-left-style: solid; border-right: none; border-top-color: transparent; border-bottom-color: transparent; }
   .tipsy-w .tipsy-arrow { left: 0; top: 50%; margin-top: -5px; border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent; }
-  
+
 .billContainer {
   padding: 15px 5px;
   border-bottom: 1px solid #E0E0E0;
   margin: 3px 0;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 14px;
+  overflow: auto;
 }
 .billContainer .billTotal {
   font-weight: bold;
@@ -169,27 +184,132 @@ a#additional_tip {
   margin-left: 160px;
   font-weight: normal;
 }
-.billTable h3#taxesHeadline {
+h3#taxesHeadline {
   text-align: left;
-  border-bottom: 1px solid #E0E0E0;
   padding-bottom: 10px;
   font-size: 16px;
 }
-.billTable #taxes_input {
+.billTable .taxes_input {
   float: right;
+  clear: both;
+  margin-bottom: 10px;
 }
+
+.billTable .addTax {
+  float: right;
+  clear: both;
+  margin: 8px 0;
+}
+
 .billTable .subTotal {
   float: right;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 14px;
 }
+
 .billTable .subTotal .subTotalPrice {
   display: inline-block;
   width: 80px;
   text-align: right;
 }
+
 #calculate_button {
   display: block;
   clear: both;
   float: right;
+  margin-top: 20px;
+}
+
+.billTable {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.billRow {
+  display: table-row;
+  width: 100%;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+
+input[type="text"] {
+  width: 50%;
+  text-align: right;
+}
+.billColumn {
+  display: table-cell;
+  padding: 15px 0;
+  vertical-align: top;
+}
+.billColumn.description {
+  width: 60%;
+}
+.billColumn.label {
+  width: 20%;
+}
+.billColumn.colTotal {
+  width: 20%;
+  text-align: right;
+}
+.extrasRow span {
+  display: block;
+  clear: both;
+  padding: 8px 0;
+}
+
+.totalLabel {
+  width: 90%;
+}
+.totalLabel strong, .totalTotal strong {
+  display: block;
+  clear: both;
+  text-align: right;
+  font-size: 16px;
+  padding: 8px 0;
+}
+.totalTotal {
+  width: 10%;
+}
+
+
+#numbersFinalBillTotal th {
+  width: 200px;
+}
+#numbersFinalBillTotal tr {
+  padding: 5px;
+}
+#devices_tip {
+  background-color: #b4e2e6;
+  color: #0071cf;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+.split-header {
+  margin-top: 30px;
+  color: #00A2E3;
+}
+.billSplit-container {
+  display: none;
+}
+#numbersFinalBillTotal {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 60%;
+}
+#numbersFinalBillTotal tr td, #numbersFinalBillTotal tr th {
+  border: 1px solid #aabdc8;
+  padding: 8px 5px;
+}
+#numbersFinalBillTotal tr th {
+  color: #05598a;
+}
+#numbersFinalBillTotal tr td:last-child {
+  text-align: right;
+  width: 25%;
+}
+
+.billMegabytesType, .billMessagesType, .billMinutesType, .billMessagesTotal, .billMegabytesTotal, .billMinutesTotal, .hidden {
+  display: none;
 }

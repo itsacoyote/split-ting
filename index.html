@@ -11,87 +11,131 @@
   <h1 id="splitTingLogo">SplitTing</h1>
   <h3 id="slogan">Split Your Ting Bill!</h3>
   <div class="container">
-    <p>From your dashboard in Ting.com, go to 'Bills', select a 'Monthly Usage' and download the .csv files for each category. Upload each file to the respective section below. You can also add Taxes & Regulatory Fees at the bottom to split as well, click Calculate and your bill will be split!</p>
+    <p>From your dashboard in Ting.com, go to 'Billing History', select a 'Bill - Monthly Usage' and download the .csv files for each category. Upload each file to the respective section below. You can also add Devices and Taxes & Regulatory Fees at the bottom to split as well, click 'Split the Bill!' and your bill will be split!</p>
     <p>If you're worried about security and sharing your information in this form, not to worry. The calculations are all done on the browser without saving any data or sending anything across to any servers.</p>
-    <p><strong>12/12:</strong> Major changes in this latest change. Better handling of the calculations in the billing total, and a more familiar structure on the bill form. Device charge was initially automatically added in the calculations, but due to the fact that adding/removing numbers and the fact that Ting changed the Device billing structure around June 2013 means this will now need to be added in manually by the user. If your bill is older than June, you may see that there are two rows for Devices, one for a Device charge and another row just before Taxes &amp; Regulatory Fees for Active Devices. You will need to add those two together to put in the Device Charge field below. Anything newer than June 2013, the Device Charge rows are now one row in your bill.</p>
+    <p><strong>Feb 2015:</strong> Hooray! The app has been updated! Months ago Ting slightly adjusted the output of the bill files which broke part of the app, specifically the Megabytes. I've fixed it so that going forward from that moment, the app splits all buckets properly. Even better, I overhauled the calculations so you shouldn't find any missing or extraneous pennies to the split!<br>Unfortunately, the app will likely not work for older bills (maybe six months back), I may try and get to that later.</p>
     <p>If any errors do pop up, or if you have any feature requests, you can email to <a href="mailto:split.ting.app@gmail.com">split.ting.app@gmail.com</a></p>
   </div>
   <div class="container">
     <div class="input_box">
-      <h4 class="section_header">Minutes</h4>
-      <input class="ting_button" type="file" id="minutes_file" name="files[]" multiple />
-      <table class="total" id="minutes_total">
-        <thead></thead>
-        <tbody></tbody>
-      </table>
+      <h4 class="section_header">Drop All the Files!</h4>
+      <span>No more dropping files one at a time,<br>select all three at once!</span>
+      <input class="ting_button" type="file" id="bills_files" name="files[]" multiple />
     </div>
-    <div class="input_box">
-      <h4 class="section_header">Text Messages</h4>
-      <input class="ting_button" type="file" id="messages_file" name="files[]" multiple />
-      <table class="total" id="messages_total">
-        <thead></thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    <div class="input_box">
-      <h4 class="section_header">Megabytes</h4>
-      <input class="ting_button" type="file" id="megabytes_file" name="files[]" multiple />
-      <table class="total" id="megabytes_total">
-        <thead></thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
-  <div class="container">
+
     <div class="billTable">
-      <div class="billContainer billContainerMinutes">
-        <span class="billType">Minutes</span>
-        <span class="billDescription">
-          You used <span class="billMinutes">###</span> so we charged you for the "<span class="billMinutesType">TYPE</span>" rate.<span class="billTotal billMinutesTotal">$###</span>
-          <span class="overageBillMinutes overageBill"></span>
-        </span>
+      <div class="billRow">
+        <div class="billColumn label"><span class="billMinutesType">TYPE</span> Minutes</div>
+        <div class="billColumn description">
+          <span class="hidden">
+            <span class="billMinutes">###</span> minutes used.
+          </span>
+        </div>
+        <div class="billColumn colTotal">
+          <span class="billTotal billMinutesTotal">$###</span>
+        </div>
       </div>
-      <div class="billContainer billContainerMessages">
-        <span class="billType">Messages</span>
-        <span class="billDescription">
-          You used <span class="billMessages">###</span> so we charged you for the "<span class="billMessagesType">TYPE</span>" rate.<span class="billTotal billMessagesTotal">$###</span>
-          <span class="overageBillMessages overageBill"></span>
-        </span>
+      <div class="billRow">
+        <div class="billColumn label"><span class="billMessagesType">TYPE</span> Messages</div>
+        <div class="billColumn description">
+          <span class="hidden">
+            <span class="billMessages">###</span> messages used.
+          </span>
+        </div>
+        <div class="billColumn colTotal">
+          <span class="billTotal billMessagesTotal">$###</span>
+        </div>
       </div>
-      <div class="billContainer billContainerMegabytes">
-        <span class="billType">Megabytes</span>
-        <span class="billDescription">
-          You used <span class="billMegabytes">###</span> so we charged you for the "<span class="billMegabytesType">TYPE</span>" rate.<span class="billTotal billMegabytesTotal">$###</span>
-          <span class="overageBillMegabytes overageBill"></span>
-        </span>
+      <div class="billRow">
+        <div class="billColumn label"><span class="billMegabytesType">TYPE</span> Megabytes</div>
+        <div class="billColumn description">
+          <span class="hidden">
+            <span class="billMegabytes">###</span> megabytes used.
+          </span>
+        </div>
+        <div class="billColumn colTotal">
+          <span class="billTotal billMegabytesTotal">$###</span>
+        </div>
       </div>
-      <div class="billContainer billContainerDevices">
-        <span class="billType">Devices</span>
-        <span class="billDescription">Device charges for the past month</span>
-        <span class="billTotal billDevicesTotal">$<input name="additionalCharge" id="additional_charge" type="text"></span>
+      <div class="billRow">
+        <div class="billColumn label">Devices</div>
+        <div class="billColumn description">
+          Device charges for the past month <a href="#" id="devices_tip" original-title="Devices calculation may not always be exactly $6/device, hence the manual addition">&nbsp;?&nbsp;</a>
+        </div>
+        <div class="billColumn colTotal">
+          <span class="billTotal billDevicesTotal">$<input name="additionalCharge" id="additional_charge" type="text"></span>
+        </div>
       </div>
-      <br><br>
-      <h3 id="taxesHeadline">Taxes &amp; Regulatory Fees</h3>
-      <div class="billContainer">
-        <span class="billDescription">Federal, state and local taxes and regulatory fees we are required to collect</span>
-        <span id="taxes_input">$<input name="fees" id="tax_fees" type="text"></span>
+      <div class="billRow extrasRow">
+        <div class="billColumn label">Extras</div>
+        <div class="billColumn description">
+        </div>
+        <div class="billColumn colTotal">
+        </div>
       </div>
-      <br><br>
-    </div><!-- .billTable -->
+    </div>
+  <br><br>
+    <h3 id="taxesHeadline">Taxes &amp; Regulatory Fees</h3>
+    <div class="billTable">
+      <div class="billRow">
+        <div class="billColumn description">
+          Federal, state and local taxes and regulatory fees.
+        </div>
+        <div class="billColumn colTotal">
+          <span class="taxes_input">$<input id="ting_fees" name="fees" type="text"></span>
+        </div>
+      </div>
+    </div>
+  <br>
+    <div class="billTable">
+      <div class="billRow">
+        <div class="billColumn totalLabel">
+          <strong>Usage</strong>
+          <strong>Taxes &amp; regulatory fees</strong>
+          <strong>Total</strong>
+        </div>
+        <div class="billColumn totalTotal">
+        </div>
+      </div>
+    </div>
     <input type="button" class="ting_button" id="calculate_button" value="Split the Bill!">
     <br><br>
-    <div class="finalBillTotalContainer">
-      <table id="numbersFinalBillTotal">
-        <thead></thead>
-        <tbody></tbody>
-      </table>
+    <div class="billSplit-container">
+      <h1 class="split-header">Your Bill Splits Out To:</h1>
+      <div class="finalBillTotalContainer">
+        <table id="numbersFinalBillTotal">
+          <thead>
+            <tr>
+              <th>Phone</th>
+              <th>Minutes</th>
+              <th>Messages</th>
+              <th>Megabytes</th>
+              <th>Bill</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </body>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="jquery.csv-0.71.min.js"></script>
+<script src="lib/jquery.3.1.1.min.js"></script>
+<script src="lib/jquery.csv-0.71.min.js"></script>
+<script src="lib/underscore.js"></script>
+<script src="lib/jquery.tipsy.js"></script>
+<script src="phoneNumber.js"></script>
+<script src="bill.js"></script>
+<script src="calculator.js"></script>
+<script src="splitTing.js"></script>
+<script src="view.js"></script>
+<script src="tingPlans.js"></script>
 <script src="script.js"></script>
 <script type="text/javascript">
+  $('#devices_tip').tipsy({gravity: 's'});
+  $('#devices_tip').on('click', function(e){
+    event.preventDefault();
+  });
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-46188222-1']);
