@@ -113,7 +113,7 @@ div.container {
   line-height: 1;
 }
 
-#bill-files:hover {
+#bill-files:hover, #bill-files:focus {
   background: #303030;
 }
 
@@ -177,7 +177,7 @@ div.container {
   line-height: 1;
 }
 
-.ting-button:hover {
+.ting-button:hover, .ting-button:focus {
   background: #303030;
 }
 
@@ -188,7 +188,7 @@ div.container {
   color: #00A2E3;
 }
 
-.ting-button.secondary:hover {
+.ting-button.secondary:hover, .ting-button.secondary:focus {
   background-color: #e6e6e6;
   color: #00709c;
   text-decoration: underline;
