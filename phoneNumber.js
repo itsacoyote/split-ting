@@ -6,4 +6,5 @@ function PhoneNumber(account) {
     this.messages = 0;
     this.megabytes = 0;
     this.kilobytes = 0;
+    this.international = 0;
 }

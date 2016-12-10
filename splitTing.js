@@ -27,13 +27,13 @@ SplitTing.prototype.buildUsers = function (file, type) {
     var number,
         nickname,
         fileReader = new FileReader();
-    
+
     fileReader.readAsText(file);
 
     fileReader.onload = function (event) {
         var csv = event.target.result;
         var data = $.csv.toObjects(csv);
-        
+
         _.each(data, function (row, index) {
             switch (type) {
                 case 'minutes':
@@ -48,7 +48,7 @@ SplitTing.prototype.buildUsers = function (file, type) {
 
             if (typeof (phoneNumbers[number]) === 'undefined') {
                 phoneNumbers[number] = new PhoneNumber({
-                    number: number, 
+                    number: number,
                     nickname: nickname
                 });
             }
@@ -85,7 +85,7 @@ SplitTing.prototype.handleFile = function (evt) {
     }, this);
 
     if (fileCount === 3) {
-        view.hideFileUploader();        
+        view.hideFileUploader();
     }
 };
 
@@ -94,7 +94,7 @@ SplitTing.prototype.calculateBill = function () {
 
     bill.total.taxes = view.getFees();
 
-    bill.total.plan = bill.minutes.total + bill.messages.total + bill.megabytes.total + bill.deviceCharge;
+    bill.total.plan = bill.minutes.total + bill.messages.total + bill.megabytes.total + bill.deviceCharge + bill.international.total;
 
     view.displayTotal();
     view.splitTable();

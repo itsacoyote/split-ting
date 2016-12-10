@@ -1,9 +1,9 @@
-function Calculator() {    
+function Calculator() {
     this.tingNumber = '8558464389';
 }
 
 Calculator.prototype.calcMinutes = function calcMinutes(file) {
-    var fileReader = new FileReader(),    
+    var fileReader = new FileReader(),
         self = this,
         minutes = 0;
 
@@ -11,18 +11,21 @@ Calculator.prototype.calcMinutes = function calcMinutes(file) {
 
     fileReader.onload = function (event) {
         var csv = event.target.result;
-        var data = $.csv.toObjects(csv);        
+        var data = $.csv.toObjects(csv);
 
         _.each(data, function (row, index) {
             var number = row['Phone'];
             var nickname = row['Nickname'];
-            
+            var surcharges = +row['Surcharges ($)'];
+            var duration = +row['Duration (min)'];
+
             if ( row['Partner\'s Phone'] !== self.tingNumber || row['Features'] !== 'VM') {
-                if (+row['Surcharges ($)'] > 0) {
-                    bill.calculateInternational(+row['Duration (min)'], +row['Surcharges ($)']);
+                if (surcharges > 0) {
+                    phoneNumbers[number].international += surcharges;
+                    bill.calculateInternational(duration, surcharges);
                 }
-                minutes += +row['Duration (min)'];
-                phoneNumbers[number].minutes += +row['Duration (min)'];
+                minutes += duration;
+                phoneNumbers[number].minutes += duration;
             }
         });
 
@@ -55,7 +58,7 @@ Calculator.prototype.calcMessages = function calcMessages(file) {
 Calculator.prototype.calcMegabytes = function calcMegabytes(file) {
     var fileReader = new FileReader(),
         kilobytes = 0;
-    
+
     fileReader.readAsText(file);
 
     fileReader.onload = function (event) {
@@ -65,11 +68,12 @@ Calculator.prototype.calcMegabytes = function calcMegabytes(file) {
         _.each(data, function (row, index) {
             var number = row['Device'];
             var nickname = row['Nickname'];
+            var data = +row['Kilobytes'];
 
-            kilobytes += +row['Kilobytes'];  
+            kilobytes += data;
 
-            phoneNumbers[number].kilobytes += +row['Kilobytes'];
-        });        
+            phoneNumbers[number].kilobytes += data;
+        });
 
         _.each(phoneNumbers, function(number) {
             number.megabytes = number.kilobytes / 1024;
@@ -88,12 +92,12 @@ Calculator.prototype.calcPersonalBill = function (person) {
     var percentMegabytes = (person.kilobytes / bill.kilobytes);
 
     //calculate user's part of the bill
-    var minutes = bill.minutes.total * percentMinutes;
-    var messages = bill.messages.total * percentMessages;
-    var megabytes = bill.megabytes.total * percentMegabytes;
+    var minutes = bill.minutes.total ? bill.minutes.total * percentMinutes : 0;
+    var messages = bill.messages.total ? bill.messages.total * percentMessages : 0;
+    var megabytes = bill.megabytes.total ? bill.megabytes.total * percentMegabytes : 0;
     var deviceCharge = bill.deviceCharge / _.size(phoneNumbers);
 
     var taxes = bill.total.taxes / _.size(phoneNumbers);
 
-    return (minutes + messages + megabytes + taxes + deviceCharge).toFixed(3);
+    return (minutes + messages + megabytes + taxes + deviceCharge + person.international).toFixed(3);
 };
