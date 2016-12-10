@@ -151,7 +151,7 @@ div.container {
 .total-bill .total-labels {
   width: 90%;
 }
-.total-bill strong {
+.total-bill strong, .total-bill span {
   display: block;
   clear: both;
   text-align: right;
@@ -238,16 +238,19 @@ input[type="text"] {
 #bill-split-table tr td, #bill-split-table tr th {
   border: 1px solid #aabdc8;
   padding: 8px 5px;
+  text-align: right;
 }
 
 #bill-split-table tr th {
   color: #05598a;
-  text-align: left;
+  text-align: right;
 }
 
+#bill-split-table tr td:first-child, #bill-split-table tr th:first-child {
+  text-align: left;
+}
 #bill-split-table tr td:last-child, #bill-split-table tr th:last-child {
-  text-align: right;
-  width: 25%;
+  width: 20%;
 }
 
 /** Tipsy Styling **/

@@ -147,7 +147,7 @@ view.splitTable = function () {
 
     _.each(phoneNumbers, function (phoneNumber) {
         if (phoneNumber.nickname !== '') {
-            phoneLabel = phoneNumber.nickname + ' (' + phoneNumber.number + ')';
+            phoneLabel = phoneNumber.nickname + '<br>(' + phoneNumber.number + ')';
         } else {
             phoneLabel = phoneNumber.number;
         }
