@@ -1,6 +1,7 @@
 body {
   background-color: #F3F4F2;
   font-family: 'Arial','Helvetica',sans-serif;
+  margin-bottom: 50px;
 }
 *, *:before, *:after {
   box-sizing: border-box;
@@ -9,6 +10,36 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 10px;
   margin-top: 0;
   text-align: center;
+}
+p {
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.tiply {
+  background-color: #b4e2e6;
+  color: #0071cf;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+#split-ting-logo {
+  width: 247px;
+  height: 80px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 0;
+  line-height: 0;
+  background: url(splitTing_logo.png) top center no-repeat;
+}
+
+#slogan {
+  color: #00A2E3;
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none;
 }
 
 div.container {
@@ -23,33 +54,14 @@ div.container {
   overflow: auto;
 }
 
-h1#splitTingLogo {
-  width: 247px;
-  height: 80px;
-  text-align: center;
-  margin: 0 auto;
-  font-size: 0;
-  line-height: 0;
-  background: url(splitTing_logo.png) top center no-repeat;
-}
-
-h3#slogan {
-  color: #00A2E3;
-  margin-top: 10px;
-}
-
-
-p {
-  font-size: 13px;
-  line-height: 16px;
-}
-
-.section_header {
-  border-bottom: 1px solid #A6C9EE;
+.container h3 {
   text-align: left;
+  padding-bottom: 10px;
+  font-size: 16px;
+  margin-top: 30px;
 }
 
-.input_box {
+.input-box {
   border: 1px solid #DEF6FF;
   width: 35%;
   margin: 0 auto;
@@ -61,56 +73,94 @@ p {
   -webkit-border-radius: 10px;
   -ms-border-radius: 10px;
   border-radius: 10px;
+  overflow: auto;
 }
-.input_box h4 {
+
+.input-header {
   color: #00789c;
+  border-bottom: 1px solid #A6C9EE;
   text-align: center;
 }
-.input_box span {
+
+.input-box span {
   display: block;
   margin-bottom: 10px;
   line-height: 18px;
   font-size: 16px;
   text-align: center;
 }
-input {
+
+.input-box #bill-files {
   outline: none;
-}
-input[type=file] {
   width: 83%;
   margin: 0 auto;
   outline: none;
   display: block;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -ms-border-radius: 20px;
+  border-radius: 20px;
+  padding: 8px 15px;
+  margin-top: 20px;
+  background: #00A2E3;
+  color: #FFF;
+  font-weight: normal;
+  font-size: 16px;
+  font-family: 'ProximaNovaRegular','Arial',sans-serif;
+  text-transform: none;
+  border: 0;
+  cursor: pointer;
+  line-height: 1;
 }
 
-.total {
-  border-top: 1px solid #A6C9EE;
-  padding: 4px 0;
-  display: block;
-  margin-top: 10px;
+#bill-files:hover {
+  background: #303030;
+}
+
+.bill-table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
   font-size: 14px;
-  display: none;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.bill-table > div {
+  display: table-row;
   width: 100%;
 }
-.total tr td {
-  padding: 4px 0px;
+.bill-row > div {
+  display: table-cell;
+  padding: 12px 5px;
 }
-.total thead tr:first-child th:nth-child(1),
-.total tbody tr td:nth-child(1) {
-  width: 100px;
-  text-align: left;
+.bill-row .label {
+  width: 12%;
 }
-.total thead tr:first-child th:nth-child(2),
-.total tbody tr td:nth-child(2) {
-  width: 100px;
+.bill-row .type {
+  width: 10%;
+}
+.bill-row .total {
+  width: 15%;
   text-align: right;
 }
-
-#finalBillTotalContainer {
-  display: none;
+.bill-row .type span {
+  font-weight: bold;
 }
 
-.ting_button {
+.total-bill .total-labels {
+  width: 90%;
+}
+.total-bill strong {
+  display: block;
+  clear: both;
+  text-align: right;
+  font-size: 16px;
+  padding: 8px 0;
+}
+
+.ting-button {
+  float: right;
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
   -ms-border-radius: 20px;
@@ -126,220 +176,98 @@ input[type=file] {
   cursor: pointer;
   line-height: 1;
 }
-.ting_button:hover {
+
+.ting-button:hover {
   background: #303030;
 }
 
-.ting_button_secondary {
-  float: right;
-  margin-top: 20px;
+.ting-button.secondary {
   margin-right: 30px;
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -ms-border-radius: 20px;
-  border-radius: 20px;
-  padding: 8px 15px;
+  float: right;
   background: transparent;
   color: #00A2E3;
-  font-weight: normal;
-  font-size: 16px;
-  font-family: 'ProximaNovaRegular','Arial',sans-serif;
-  text-transform: none;
-  border: 0;
-  cursor: pointer;
-  line-height: 1;
 }
 
-.ting_button_secondary:hover {
+.ting-button.secondary:hover {
   background-color: #e6e6e6;
   color: #00709c;
   text-decoration: underline;
 }
 
-a#additional_tip {
-  background-color: #3061AB;
-  color: #fff;
-}
-.tipsy { font-size: 13px; position: absolute; padding: 5px; z-index: 100000; line-height: 15px; }
-  .tipsy-inner { background-color: #C2F5FF; color: #0C487E; max-width: 200px; padding: 5px 8px 4px 8px; text-align: center; }
-
-  /* Rounded corners */
-  .tipsy-inner { border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
-
-  /* Uncomment for shadow */
-  /*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
-
-  .tipsy-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000; }
-
-  /* Rules to colour arrows */
-  .tipsy-arrow-n { border-bottom-color: #000; }
-  .tipsy-arrow-s { border-top-color: #000; }
-  .tipsy-arrow-e { border-left-color: #000; }
-  .tipsy-arrow-w { border-right-color: #000; }
-
-	.tipsy-n .tipsy-arrow { top: 0px; left: 50%; margin-left: -5px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent; }
-    .tipsy-nw .tipsy-arrow { top: 0; left: 10px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;}
-    .tipsy-ne .tipsy-arrow { top: 0; right: 10px; border-bottom-style: solid; border-top: none;  border-left-color: transparent; border-right-color: transparent;}
-  .tipsy-s .tipsy-arrow { bottom: 0; left: 50%; margin-left: -5px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
-    .tipsy-sw .tipsy-arrow { bottom: 0; left: 10px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
-    .tipsy-se .tipsy-arrow { bottom: 0; right: 10px; border-top-style: solid; border-bottom: none; border-left-color: transparent; border-right-color: transparent; }
-  .tipsy-e .tipsy-arrow { right: 0; top: 50%; margin-top: -5px; border-left-style: solid; border-right: none; border-top-color: transparent; border-bottom-color: transparent; }
-  .tipsy-w .tipsy-arrow { left: 0; top: 50%; margin-top: -5px; border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent; }
-
-.billContainer {
-  padding: 15px 5px;
-  border-bottom: 1px solid #E0E0E0;
-  margin: 3px 0;
-  font-weight: normal;
-  font-size: 14px;
-  overflow: auto;
-}
-.billContainer .billTotal {
-  font-weight: bold;
-}
-.billContainer span.billType {
-  display: inline-block;
-  width: 150px;
-}
-.billContainer span.billTotal, span.billContainerTotal {
-  float: right;
-}
-.billContainer .overageBill {
-  clear: both;
-  display: block;
-  margin-left: 160px;
-  font-weight: normal;
-}
-h3#taxesHeadline {
-  text-align: left;
-  padding-bottom: 10px;
-  font-size: 16px;
-}
-.billTable .taxes_input {
-  float: right;
-  clear: both;
-  margin-bottom: 10px;
-}
-
-.billTable .addTax {
-  float: right;
-  clear: both;
-  margin: 8px 0;
-}
-
-.billTable .subTotal {
-  float: right;
-  font-weight: normal;
-  font-size: 14px;
-}
-
-.billTable .subTotal .subTotalPrice {
-  display: inline-block;
-  width: 80px;
-  text-align: right;
-}
-
-#calculate_button {
-  display: block;
-  clear: both;
-  float: right;
-  margin-top: 20px;
-}
-
-.billTable {
+.bill-summary {
   display: table;
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
 }
-.billRow {
+.bill-row {
   display: table-row;
   width: 100%;
   border-bottom: 1px solid #E0E0E0;
 }
 
-
 input[type="text"] {
   width: 50%;
   text-align: right;
 }
-.billColumn {
-  display: inline-block;
-  padding: 15px 0;
-  vertical-align: top;
-}
-.billColumn.description {
-}
-.billColumn.label {
-  width: 120px;
-}
-.billColumn.colTotal {
-  width: 120px;
-  text-align: right;
-  float: right;
-}
-.billColumn.type {
-  width: 70px;
-}
-.extrasRow span {
+
+.extras-row span {
   display: block;
   clear: both;
   padding: 8px 0;
-}
-
-.totalLabel {
-  width: 90%;
-}
-.totalLabel strong, .totalTotal strong {
-  display: block;
-  clear: both;
-  text-align: right;
-  font-size: 16px;
-  padding: 8px 0;
-}
-.totalTotal {
-  width: 10%;
-}
-
-
-#numbersFinalBillTotal th {
-  width: 200px;
-}
-#numbersFinalBillTotal tr {
-  padding: 5px;
-}
-.tiply {
-  background-color: #b4e2e6;
-  color: #0071cf;
-  border-radius: 50%;
-  text-decoration: none;
 }
 
 .split-header {
-  margin-top: 30px;
   color: #00A2E3;
 }
-.billSplit-container {
-  display: none;
+
+#bill-split-table th {
+  width: 200px;
 }
-#numbersFinalBillTotal {
+
+#bill-split-table tr {
+  padding: 5px;
+}
+
+#bill-split-table {
   margin: 0 auto;
   border-collapse: collapse;
   width: 85%;
 }
-#numbersFinalBillTotal tr td, #numbersFinalBillTotal tr th {
+
+#bill-split-table tr td, #bill-split-table tr th {
   border: 1px solid #aabdc8;
   padding: 8px 5px;
 }
-#numbersFinalBillTotal tr th {
+
+#bill-split-table tr th {
   color: #05598a;
   text-align: left;
 }
-#numbersFinalBillTotal tr td:last-child, #numbersFinalBillTotal tr th:last-child {
+
+#bill-split-table tr td:last-child, #bill-split-table tr th:last-child {
   text-align: right;
   width: 25%;
 }
 
-.billMegabytesType, .billMessagesType, .billMinutesType, .billMessagesTotal, .billMegabytesTotal, .billMinutesTotal, .hidden {
-  display: none;
-}
+/** Tipsy Styling **/
+.tipsy { font-size: 13px; position: absolute; padding: 5px; z-index: 100000; line-height: 15px; }
+.tipsy-inner { background-color: #C2F5FF; color: #0C487E; max-width: 200px; padding: 5px 8px 4px 8px; text-align: center; }
+/* Rounded corners */
+.tipsy-inner { border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+/* Uncomment for shadow */
+/*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
+.tipsy-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000; }
+/* Rules to colour arrows */
+.tipsy-arrow-n { border-bottom-color: #000; }
+.tipsy-arrow-s { border-top-color: #000; }
+.tipsy-arrow-e { border-left-color: #000; }
+.tipsy-arrow-w { border-right-color: #000; }
+.tipsy-n .tipsy-arrow { top: 0px; left: 50%; margin-left: -5px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent; }
+.tipsy-nw .tipsy-arrow { top: 0; left: 10px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;}
+.tipsy-ne .tipsy-arrow { top: 0; right: 10px; border-bottom-style: solid; border-top: none;  border-left-color: transparent; border-right-color: transparent;}
+.tipsy-s .tipsy-arrow { bottom: 0; left: 50%; margin-left: -5px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
+.tipsy-sw .tipsy-arrow { bottom: 0; left: 10px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
+.tipsy-se .tipsy-arrow { bottom: 0; right: 10px; border-top-style: solid; border-bottom: none; border-left-color: transparent; border-right-color: transparent; }
+.tipsy-e .tipsy-arrow { right: 0; top: 50%; margin-top: -5px; border-left-style: solid; border-right: none; border-top-color: transparent; border-bottom-color: transparent; }
+.tipsy-w .tipsy-arrow { left: 0; top: 50%; margin-top: -5px; border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent; }

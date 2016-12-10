@@ -1,16 +1,16 @@
 var view = {};
 
 view.showMinutes = function () {
-    $('.billMinutes')
+    $('.bill-minutes')
         .text(bill.minutes.usage)
         .parent()
         .fadeIn();
 
-    $('.billMinutesType')
+    $('.minutes-type')
         .text(bill.minutes.plan.size)
         .fadeIn();
 
-    $('.billMinutesTotal')
+    $('.minutes-total')
         .text('$ ' + bill.minutes.plan.price.toFixed(2))
         .fadeIn();
 
@@ -28,9 +28,9 @@ view.showMinutes = function () {
             '</span>'
         ].join('');
 
-        $('.extrasRow .description')
+        $('.extras-row .description')
             .append(row1).hide().fadeIn();
-        $('.extrasRow .colTotal')
+        $('.extras-row .total')
             .append(row2).hide().fadeIn();
     }
 
@@ -48,25 +48,25 @@ view.showMinutes = function () {
             '</span>'
         ].join('');
 
-        $('.extrasRow .description')
+        $('.extras-row .description')
             .append(row1).hide().fadeIn();
 
-        $('.extrasRow .colTotal')
+        $('.extras-row .total')
             .append(row2).hide().fadeIn();
     }
 };
 
 view.showMegabytes = function () {
-    $('.billMegabytes')
+    $('.bill-megabytes')
         .text(bill.megabytes.usage)
         .parent()
         .fadeIn();
 
-    $('.billMegabytesType')
+    $('.megabytes-type')
         .text(bill.megabytes.plan.size)
         .fadeIn();
 
-    $('.billMegabytesTotal')
+    $('.megabytes-total')
         .text('$ ' + bill.megabytes.plan.price.toFixed(2))
         .fadeIn();
 
@@ -84,24 +84,24 @@ view.showMegabytes = function () {
             '</span>'
         ].join('');
 
-        $('.extrasRow .description')
+        $('.extras-row .description')
             .append(row1).hide().fadeIn();
-        $('.extrasRow .colTotal')
+        $('.extras-row .total')
             .append(row2).hide().fadeIn();
     }
 };
 
 view.showMessages = function () {
-    $('.billMessages')
+    $('.bill-messages')
         .text(bill.messages.usage)
         .parent()
         .fadeIn();
 
-    $('.billMessagesType')
+    $('.messages-type')
         .text(bill.messages.plan.size)
         .fadeIn();
 
-    $('.billMessagesTotal')
+    $('.messages-total')
         .text('$ ' + bill.messages.plan.price.toFixed(2))
         .fadeIn();
 
@@ -119,27 +119,27 @@ view.showMessages = function () {
             '</span>'
         ].join('');
 
-        $('.extrasRow .description')
+        $('.extras-row .description')
             .append(row1).hide().fadeIn();
-        $('.extrasRow .colTotal')
+        $('.extras-row .col-total')
             .append(row2).hide().fadeIn();
     }
 };
 
 view.hideFileUploader = function () {
-    $('.input_box').slideUp();
+    $('.input-box').slideUp();
 };
 
 view.getDeviceCharge = function () {
-    return $('#additional_charge').val() !== '' ? +$('#additional_charge').val() : 0;
+    return $('#additional-charge').val() !== '' ? +$('#additional-charge').val() : 0;
 };
 
 view.getFees = function () {
-    return +$('#ting_fees').val()
+    return +$('#ting-fees').val()
 };
 
 view.displayTotal = function () {
-    $('.totalTotal').append('<strong>' + bill.total.plan.toFixed(2) + '</strong><strong>' + bill.total.taxes.toFixed(2) + '</strong><strong>' + (bill.total.plan + bill.total.taxes).toFixed(2) + '</strong>');
+    $('.total-bill .total').append('<strong>' + bill.total.plan.toFixed(2) + '</strong><strong>' + bill.total.taxes.toFixed(2) + '</strong><strong>' + (bill.total.plan + bill.total.taxes).toFixed(2) + '</strong>');
 };
 
 view.splitTable = function () {
@@ -172,31 +172,31 @@ view.splitTable = function () {
             '</tr>'
         ].join('');
 
-        $('#numbersFinalBillTotal tbody').append(row);
+        $('#bill-split-table tbody').append(row);
 
     });
 
-    $('.billSplit-container').fadeIn();
+    $('.container.bill-split').fadeIn();
 
-    $("html, body").animate({ 
-        scrollTop: $(document).height() 
+    $("html, body").animate({
+        scrollTop: $(document).height()
     }, "slow");
 
     return false;
 };
 
 view.resetView = function () {
-    $('.billColumn.type span').text('');
-    $('.billColumn.description > span').fadeOut();
-    $('#additional_charge').val('');
-    $('#ting_fees').val('');
-    $('.billColumn.totalTotal').html('');
-    $('#numbersFinalBillTotal tbody').html('');
-    $('.billSplit-container').fadeOut();
-    $('.billRow.extrasRow .colTotal').html('');
-    $('.billColumn .billTotal').fadeOut();
+    $('.bill-row .type span').text('');
+    $('.bill-row .description > span').fadeOut();
+    $('#additional-charge').val('');
+    $('#ting-fees').val('');
+    $('.total-bill .total').html('');
+    $('#bill-split-table tbody').html('');
+    $('.container.bill-split').fadeOut();
+    $('.extras-row .total').html('');
+    $('.bill-row .total span.hidden').fadeOut();
 
-    $("#bills_files").replaceWith($("#bills_files").val('').clone(true));
+    $("#bill-files").replaceWith($("#bill-files").val('').clone(true));
 
-    $('.input_box').slideDown();
+    $('.input-box').slideDown();
 };

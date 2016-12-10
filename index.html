@@ -8,8 +8,8 @@
 </head>
 
 <body>
-  <h1 id="splitTingLogo">SplitTing</h1>
-  <h3 id="slogan">Split Your Ting Bill!</h3>
+  <h1 id="split-ting-logo">SplitTing</h1>
+  <h2 id="slogan">Split Your Ting Bill!</h2>
   <div class="container">
     <p>From your dashboard in Ting.com, go to 'Billing History', select a 'Bill - Monthly Usage' and download the .csv files for each category. Upload each file to the respective section below. You can also add Devices and Taxes & Regulatory Fees at the bottom to split as well, click 'Split the Bill!' and your bill will be split!</p>
     <p>If you're worried about security and sharing your information in this form, not to worry. The calculations are all done on the browser without saving any data or sending anything across to any servers.</p>
@@ -17,115 +17,124 @@
     <p>If any errors do pop up, or if you have any feature requests, you can email to <a href="mailto:split.ting.app@gmail.com">split.ting.app@gmail.com</a></p>
   </div>
   <div class="container">
-    <div class="input_box">
-      <h4 class="section_header">Drop All the Files!</h4>
-      <span>No more dropping files one at a time,<br>select all three at once!</span>
-      <input class="ting_button" type="file" id="bills_files" name="files[]" multiple />
+    <div class="input-box">
+      <h4 class="input-header">Upload your Ting Bill .csv's</h4>
+      <span>Upload up to three csv files from your bill.</span>
+      <input type="file" id="bill-files" name="files[]" multiple />
     </div>
 
-    <div class="billTable">
-      <div class="billRow">
-        <div class="billColumn label">Minutes</div>
-        <div class="billColumn type"><span class="billMinutesType">TYPE</span></div>
-        <div class="billColumn description">
+    <h3>Bill Summary</h3>
+
+    <div class="bill-table bill-summary">
+      <div class="bill-row">
+        <div class="label">Minutes</div>
+        <div class="type">
+          <span class="minutes-type hidden">TYPE</span>
+        </div>
+        <div class="description">
           <span class="hidden">
-            <span class="billMinutes">###</span> minutes used.
+            <span class="bill-minutes">###</span> minutes used.
           </span>
         </div>
-        <div class="billColumn colTotal">
-          <span class="billTotal billMinutesTotal">$###</span>
+        <div class="total">
+          <span class="minutes-total hidden">$###</span>
         </div>
       </div>
-      <div class="billRow">
-        <div class="billColumn label">Messages</div>
-        <div class="billColumn type"><span class="billMessagesType">TYPE</span></div>
-        <div class="billColumn description">
+      <div class="bill-row">
+        <div class="label">Messages</div>
+        <div class="type">
+          <span class="messages-type hidden">TYPE</span>
+        </div>
+        <div class="description">
           <span class="hidden">
-            <span class="billMessages">###</span> messages used.
+            <span class="bill-messages">###</span> messages used.
           </span>
         </div>
-        <div class="billColumn colTotal">
-          <span class="billTotal billMessagesTotal">$###</span>
+        <div class="total">
+          <span class="messages-total hidden">$###</span>
         </div>
       </div>
-      <div class="billRow">
-        <div class="billColumn label">Megabytes</div>
-        <div class="billColumn type"><span class="billMegabytesType">TYPE</span></div>
-        <div class="billColumn description">
+      <div class="bill-row">
+        <div class="label">Megabytes</div>
+        <div class="type">
+          <span class="megabytes-type hidden">TYPE</span>
+        </div>
+        <div class="description">
           <span class="hidden">
-            <span class="billMegabytes">###</span> megabytes used.
+            <span class="bill-megabytes">###</span> megabytes used.
           </span>
         </div>
-        <div class="billColumn colTotal">
-          <span class="billTotal billMegabytesTotal">$###</span>
+        <div class="total">
+          <span class="megabytes-total hidden">$###</span>
         </div>
       </div>
-      <div class="billRow">
-        <div class="billColumn label">Devices</div>
-        <div class="billColumn type"></div>
-        <div class="billColumn description">
-          Device charges for the past month <a href="#" class="tiply" id="devices_tip" original-title="Devices calculation may not always be exactly $6/device, hence the manual addition">&nbsp;?&nbsp;</a>
+      <div class="bill-row">
+        <div class="label">Devices</div>
+        <div class="type"></div>
+        <div class="description">
+          Device charges for the past month <a href="#" class="tiply" id="devices-tip" original-title="Devices calculation may not always be exactly $6/device, hence the manual addition">&nbsp;?&nbsp;</a>
         </div>
-        <div class="billColumn colTotal">
-          <span class="billDevicesTotal">$<input name="additionalCharge" id="additional_charge" type="text"></span>
+        <div class="total">
+          <span class="devices-total">
+            $<input name="additional-charge" id="additional-charge" type="text">
+          </span>
         </div>
       </div>
-      <div class="billRow extrasRow">
-        <div class="billColumn label">Extras</div>
-        <div class="billColumn type"></div>
-        <div class="billColumn description">
-        </div>
-        <div class="billColumn colTotal">
-        </div>
+      <div class="bill-row extras-row">
+        <div class="label">Extras</div>
+        <div class="type"></div>
+        <div class="description"></div>
+        <div class="total"></div>
       </div>
     </div>
-  <br><br>
-    <h3 id="taxesHeadline">Taxes &amp; Regulatory Fees</h3>
-    <div class="billTable">
-      <div class="billRow">
-        <div class="billColumn description">
+
+    <h3>Taxes &amp; Regulatory Fees</h3>
+
+    <div class="bill-table total-taxes">
+      <div class="bill-row">
+        <div class="description">
           Federal, state and local taxes and regulatory fees.
         </div>
-        <div class="billColumn colTotal">
-          <span class="taxes_input">$<input id="ting_fees" name="fees" type="text"></span>
+        <div class="total">
+          $<input id="ting-fees" name="fees" type="text">
         </div>
       </div>
     </div>
-  <br>
-    <div class="billTable">
-      <div class="billRow">
-        <div class="billColumn totalLabel">
+
+    <div class="bill-table total-bill">
+      <div class="bill-row">
+        <div class="total-labels">
           <strong>Usage</strong>
           <strong>Taxes &amp; regulatory fees</strong>
           <strong>Total</strong>
         </div>
-        <div class="billColumn totalTotal">
+        <div class="total">
         </div>
       </div>
     </div>
-    <input type="button" class="ting_button" id="calculate_button" value="Split the Bill!">
-    <input type="button" class="ting_button_secondary" id="reset_button" value="Reset Form">
-    <br><br>
-    <div class="billSplit-container">
-      <h1 class="split-header">Your Bill Splits Out To:</h1>
-      <div class="finalBillTotalContainer">
-        <table id="numbersFinalBillTotal">
-          <thead>
-            <tr>
-              <th>Phone</th>
-              <th>Minutes</th>
-              <th>Messages</th>
-              <th>Megabytes <a href="#" class="tiply" original-title="MB in billing is rounded up from the decimal">&nbsp;?&nbsp;</a></th>
-              <th>Bill <a href="#" class="tiply" original-title="Three decimal points is the closest in accuracy to bill total">&nbsp;?&nbsp;</a></th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <input type="button" class="ting-button" id="calculate-button" value="Split the Bill!">
+    <input type="button" class="ting-button secondary" id="reset-button" value="Reset Form">
   </div>
+
+  <div class="container bill-split hidden">
+    <h2 class="split-header">Your Bill Splits Out To:</h2>
+    <table id="bill-split-table">
+      <thead>
+        <tr>
+          <th>Phone</th>
+          <th>Minutes</th>
+          <th>Messages</th>
+          <th>Megabytes <a href="#" class="tiply" original-title="MB in billing is rounded up from the decimal">&nbsp;?&nbsp;</a></th>
+          <th>Bill <a href="#" class="tiply" original-title="Three decimal points is the closest in accuracy to bill total">&nbsp;?&nbsp;</a></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
 </body>
+
 <script src="lib/jquery.3.1.1.min.js"></script>
 <script src="lib/jquery.csv-0.71.min.js"></script>
 <script src="lib/underscore.js"></script>
