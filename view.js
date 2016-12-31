@@ -121,7 +121,7 @@ view.showMessages = function () {
 
         $('.extras-row .description')
             .append(row1).hide().fadeIn();
-        $('.extras-row .col-total')
+        $('.extras-row .total')
             .append(row2).hide().fadeIn();
     }
 };

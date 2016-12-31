@@ -19,7 +19,7 @@ Calculator.prototype.calcMinutes = function calcMinutes(file) {
             var surcharges = +row['Surcharges ($)'];
             var duration = +row['Duration (min)'];
 
-            if ( row['Partner\'s Phone'] !== self.tingNumber || row['Features'] !== 'VM') {
+            if ( row['Partner\'s Phone'] !== self.tingNumber || !row['Features'].includes('VM')) {
                 if (surcharges > 0) {
                     phoneNumbers[number].international += surcharges;
                     bill.calculateInternational(duration, surcharges);
