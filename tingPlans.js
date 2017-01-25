@@ -1,7 +1,7 @@
 //With a calculated 5% grace overage on plans
 var tingPlans = {
     minutes: {
-        levels: [105, 525, 1050, 2100],
+        levels: [105, 525, 1050, 2205],
         plans: {
             S: 3,
             M: 9,
@@ -12,7 +12,7 @@ var tingPlans = {
     },
 
     messages: {
-        levels: [105, 1050, 2100, 4800],
+        levels: [105, 1050, 2100, 5040],
         plans: {
             S: 3,
             M: 5,
@@ -23,7 +23,7 @@ var tingPlans = {
     },
 
     megabytes: {
-        levels: [105, 525, 1051, 2048],
+        levels: [105, 525, 1051, 2099],
         plans: {
             S: 3,
             M: 10,
