@@ -58,7 +58,7 @@ Bill.prototype.setLines = function(lines) {
 Bill.prototype.setMinutes = function (minutes) {
     var topPlan = tingPlans.minutes.levels[3];
 
-    if (minutes > topPlan) {
+    if (minutes > this.fivePercentEdge(topPlan)) {
         this.minutes.usage = topPlan;
         this.minutes.overage.usage = (minutes - topPlan);
     } else {
@@ -71,7 +71,7 @@ Bill.prototype.setMinutes = function (minutes) {
 Bill.prototype.setMessages = function (messages) {
     var topPlan = tingPlans.messages.levels[3];
 
-    if (messages > topPlan) {
+    if (messages > this.fivePercentEdge(topPlan)) {
         this.messages.usage = topPlan;
         this.messages.overage.usage = (messages - topPlan);
     } else {
@@ -86,7 +86,7 @@ Bill.prototype.setMegabytes = function (kilobytes) {
     var megabytes = Math.ceil(kilobytes / 1024);
     this.kilobytes = kilobytes;
 
-    if (megabytes > topPlan) {
+    if (megabytes > this.fivePercentEdge(topPlan)) {
         this.megabytes.usage = topPlan;
         this.megabytes.overage.usage = (megabytes - topPlan);
     } else {
@@ -106,13 +106,13 @@ Bill.prototype.calculateMinutes = function () {
         if (this.minutes.usage <= tingPlans.minutes.levels[0]) {
             this.minutes.plan.size = 'S';
             this.minutes.plan.price = tingPlans.minutes.plans['S'];
-        } else if (this.minutes.usage <= tingPlans.minutes.levels[1]) {
+        } else if (this.minutes.usage <= this.fivePercentEdge(tingPlans.minutes.levels[1])) {
             this.minutes.plan.size = 'M';
             this.minutes.plan.price = tingPlans.minutes.plans['M'];
-        } else if (this.minutes.usage <= tingPlans.minutes.levels[2]) {
+        } else if (this.minutes.usage <= this.fivePercentEdge(tingPlans.minutes.levels[2])) {
             this.minutes.plan.size = 'L';
             this.minutes.plan.price = tingPlans.minutes.plans['L'];
-        } else if (this.minutes.usage <= tingPlans.minutes.levels[3]) {
+        } else if (this.minutes.usage <= this.fivePercentEdge(tingPlans.minutes.levels[3])) {
             this.minutes.plan.size = 'XL';
             this.minutes.plan.price = tingPlans.minutes.plans['XL'];
         }
@@ -133,13 +133,13 @@ Bill.prototype.calculateMessages = function () {
         if (this.messages.usage <= tingPlans.messages.levels[0]) {
             this.messages.plan.size = 'S';
             this.messages.plan.price = tingPlans.messages.plans['S'];
-        } else if (this.messages.usage <= tingPlans.messages.levels[1]) {
+        } else if (this.messages.usage <= this.fivePercentEdge(tingPlans.messages.levels[1])) {
             this.messages.plan.size = 'M';
             this.messages.plan.price = tingPlans.messages.plans['M'];
-        } else if (this.messages.usage <= tingPlans.messages.levels[2]) {
+        } else if (this.messages.usage <= this.fivePercentEdge(tingPlans.messages.levels[2])) {
             this.messages.plan.size = 'L';
             this.messages.plan.price = tingPlans.messages.plans['L'];
-        } else if (this.messages.usage <= tingPlans.messages.levels[3]) {
+        } else if (this.messages.usage <= this.fivePercentEdge(tingPlans.messages.levels[3])) {
             this.messages.plan.size = 'XL';
             this.messages.plan.price = tingPlans.messages.plans['XL'];
         }
@@ -160,13 +160,13 @@ Bill.prototype.calculateMegabytes = function () {
         if (this.megabytes.usage <= tingPlans.megabytes.levels[0]) {
             this.megabytes.plan.size = 'S';
             this.megabytes.plan.price = tingPlans.megabytes.plans['S'];
-        } else if (this.megabytes.usage <= tingPlans.megabytes.levels[1]) {
+        } else if (this.megabytes.usage <= this.fivePercentEdge(tingPlans.megabytes.levels[1])) {
             this.megabytes.plan.size = 'M';
             this.megabytes.plan.price = tingPlans.megabytes.plans['M'];
-        } else if (this.megabytes.usage <= tingPlans.megabytes.levels[2]) {
+        } else if (this.megabytes.usage <= this.fivePercentEdge(tingPlans.megabytes.levels[2])) {
             this.megabytes.plan.size = 'L';
             this.megabytes.plan.price = tingPlans.megabytes.plans['L'];
-        } else if (this.megabytes.usage <= tingPlans.megabytes.levels[3]) {
+        } else if (this.megabytes.usage <= this.fivePercentEdge(tingPlans.megabytes.levels[3])) {
             this.megabytes.plan.size = 'XL';
             this.megabytes.plan.price = tingPlans.megabytes.plans['XL'];
         }
@@ -182,3 +182,9 @@ Bill.prototype.calculateMegabytes = function () {
 
     view.showMegabytes();
 };
+
+Bill.prototype.fivePercentEdge = function(limit) {
+    var fivePercent = limit * 0.05;
+
+    return limit + fivePercent;
+}

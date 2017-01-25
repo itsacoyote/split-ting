@@ -48,9 +48,9 @@ Calculator.prototype.calcMessages = function calcMessages(file) {
         _.each(data, function (row, index) {
             var number = row['Phone'];
             var nickname = row['Nickname'];
-
-            messages += 1;
-            phoneNumbers[number].messages += 1;
+            
+            messages++;
+            phoneNumbers[number].messages++;
         });
 
         bill.setMessages(messages);
