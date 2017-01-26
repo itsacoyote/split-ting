@@ -15,44 +15,65 @@ view.showMinutes = function () {
         .fadeIn();
 
     if (bill.minutes.plan.size === 'XL+') {
-        var row1 = [
+        var xlRow1 = [
             '<span class="hidden">',
                 bill.minutes.overage.usage,
                 ' minutes of calls beyond XL+',
             '</span>'
         ].join('');
 
-        var row2 = [
+        var xlRow2 = [
             '<span class="hidden">',
                 '$' + bill.minutes.overage.price.toFixed(2),
             '</span>'
         ].join('');
 
         $('.extras-row .description')
-            .append(row1).hide().fadeIn();
+            .append(xlRow1).hide().fadeIn();
         $('.extras-row .total')
-            .append(row2).hide().fadeIn();
+            .append(xlRow2).hide().fadeIn();
     }
 
     if (bill.international.usage > 0) {
-        var row1 = [
+        var internationalRow1 = [
             '<span>',
                 bill.international.usage,
                 ' minutes of international calling',
             '</span>'
         ].join('');
 
-        var row2 = [
+        var internationalRow2 = [
             '<span>',
                 '$' + bill.international.total.toFixed(2),
             '</span>'
         ].join('');
 
         $('.extras-row .description')
-            .append(row1).hide().fadeIn();
+            .append(internationalRow1).hide().fadeIn();
 
         $('.extras-row .total')
-            .append(row2).hide().fadeIn();
+            .append(internationalRow2).hide().fadeIn();
+    }
+
+    if (bill.directoryAssistance.usage) {
+        var daRow1 = [
+            '<span>',
+                bill.directoryAssistance.usage,
+                ' directory Assistance Calls',
+            '</span>'
+        ].join('');
+
+        var daRow2 = [
+            '<span>',
+                '$' + bill.directoryAssistance.total.toFixed(2),
+            '</span>'
+        ].join('');
+
+        $('.extras-row .description')
+            .append(daRow1).hide().fadeIn();
+
+        $('.extras-row .total')
+            .append(daRow2).hide().fadeIn();
     }
 };
 

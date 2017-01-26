@@ -6,7 +6,7 @@ var tingPlans = {
             M: 9,
             L: 18,
             XL: 35,
-            XXL: .019
+            XXL: 0.019
         }
     },
 
@@ -17,7 +17,7 @@ var tingPlans = {
             M: 5,
             L: 8,
             XL: 11,
-            XXL: .0025
+            XXL: 0.0025
         }
     },
 

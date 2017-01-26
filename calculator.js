@@ -18,17 +18,26 @@ Calculator.prototype.calcMinutes = function calcMinutes(file) {
             var nickname = row['Nickname'];
             var surcharges = +row['Surcharges ($)'];
             var duration = +row['Duration (min)'];
+            var features = row['Features'];
 
-            if (!row['Features'].includes('VM')) {
+            if (!features.includes('VM')) {
                 if ( row['Partner\'s Phone'] !== self.tingNumber) {
+
                     if (surcharges > 0) {
-                        phoneNumbers[number].international += surcharges;
-                        bill.calculateInternational(duration, surcharges);
+                        //Check if Directory Assistance call
+                        if (features.includes('DA')) {
+                            bill.setDirectoryAssistance();
+                        } else {
+                            //for now assume all else are international calls for now
+                            phoneNumbers[number].international += surcharges;
+                            bill.calculateInternational(duration, surcharges);
+                        }
                     }
+
                     minutes += duration;
                     phoneNumbers[number].minutes += duration;
                 }
-            }            
+            }
         });
 
         bill.setMinutes(minutes);
@@ -48,7 +57,7 @@ Calculator.prototype.calcMessages = function calcMessages(file) {
         _.each(data, function (row, index) {
             var number = row['Phone'];
             var nickname = row['Nickname'];
-            
+
             messages++;
             phoneNumbers[number].messages++;
         });

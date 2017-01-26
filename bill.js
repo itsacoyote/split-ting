@@ -49,6 +49,11 @@ function Bill() {
         usage: 0,
         total: 0
     };
+
+    this.directoryAssistance = {
+        usage: 0,
+        total: 0
+    };
 }
 
 Bill.prototype.setLines = function(lines) {
@@ -183,8 +188,13 @@ Bill.prototype.calculateMegabytes = function () {
     view.showMegabytes();
 };
 
+Bill.prototype.setDirectoryAssistance = function() {
+    this.directoryAssistance.usage++;
+    this.directoryAssistance.total++;
+}
+
 Bill.prototype.fivePercentEdge = function(limit) {
     var fivePercent = limit * 0.05;
 
     return limit + fivePercent;
-}
+};
