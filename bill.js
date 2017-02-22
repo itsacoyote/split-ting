@@ -107,7 +107,10 @@ Bill.prototype.calculateInternational = function (minutes, surcharge) {
 };
 
 Bill.prototype.calculateMinutes = function () {
-    if (this.minutes.usage > 0 && this.minutes.overage.usage <= 0) {
+    if (this.minutes.usage === 0) {
+        this.minutes.plan.size = 'S';
+        this.minutes.plan.price = 0;
+    } else if (this.minutes.usage > 0 && this.minutes.overage.usage <= 0) {
         if (this.minutes.usage <= tingPlans.minutes.levels[0]) {
             this.minutes.plan.size = 'S';
             this.minutes.plan.price = tingPlans.minutes.plans['S'];
@@ -134,7 +137,10 @@ Bill.prototype.calculateMinutes = function () {
 };
 
 Bill.prototype.calculateMessages = function () {
-    if (this.messages.usage > 0 && this.messages.overage.usage <= 0) {
+    if (this.messages.usage === 0) {
+        this.messages.plan.size = 'S';
+        this.messages.plan.price = 0;
+    } else if (this.messages.usage > 0 && this.messages.overage.usage <= 0) {
         if (this.messages.usage <= tingPlans.messages.levels[0]) {
             this.messages.plan.size = 'S';
             this.messages.plan.price = tingPlans.messages.plans['S'];
@@ -161,7 +167,10 @@ Bill.prototype.calculateMessages = function () {
 };
 
 Bill.prototype.calculateMegabytes = function () {
-    if (this.megabytes.usage > 0 && this.megabytes.overage.usage <= 0) {
+    if (this.megabytes.usage === 0) {
+        this.megabytes.plan.size = 'S';
+        this.megabytes.plan.price = 0;
+    } else if (this.megabytes.usage > 0 && this.megabytes.overage.usage <= 0) {
         if (this.megabytes.usage <= tingPlans.megabytes.levels[0]) {
             this.megabytes.plan.size = 'S';
             this.megabytes.plan.price = tingPlans.megabytes.plans['S'];
