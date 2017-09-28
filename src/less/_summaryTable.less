@@ -1,0 +1,80 @@
+.summary-section {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: 0;   
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    h3 {
+        text-align: left;
+        color: #444;
+        font-size: 1.1em;
+    }
+}
+
+.bill-table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    input[type="text"] {
+        width: 50%;
+        text-align: right;
+    }
+}
+
+.bill-row {
+    display: table-row;
+    width: 100%;
+    border-bottom: 1px solid #E0E0E0;
+
+    &.extras-row {
+        span {
+            display: block;
+            clear: both;
+            padding: 8px 0;
+        }
+    }
+
+    & > div {
+        display: table-cell;
+        padding: 12px 5px;
+    }
+
+    .label {
+        width: 12%;
+    }
+
+    .type {
+        width: 10%;
+    }
+
+    .total {
+        width: 15%;
+        text-align: right;
+
+        span {
+            font-weight: bold;
+        }
+    }
+
+    .description {
+        font-size: 0.95em;
+    }    
+}
+
+.total-bill {
+    .total-labels  {
+        width: 90%;
+    }        
+    strong, span {
+        display: block;
+        clear: both;
+        text-align: right;
+        font-size: 16px;
+        padding: 8px 0;
+    }
+}

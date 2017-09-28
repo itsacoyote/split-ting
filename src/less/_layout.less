@@ -1,6 +1,6 @@
 body {
     background-color: #F3F4F2;
-    font-family: 'Arial','Helvetica',sans-serif;
+    font-family: 'Open Sans', 'Arial','Helvetica',sans-serif;
     margin-bottom: 50px;
   }
   *, *:before, *:after {
@@ -10,10 +10,11 @@ body {
     margin-bottom: 10px;
     margin-top: 0;
     text-align: center;
+    color: @tingBlue;
   }
   p {
-    font-size: 0.95em;
-    line-height: 1.5em;
+    font-size: 1.0em;
+    line-height: 1.6em;
     color: #444;
   }
   
@@ -29,7 +30,7 @@ body {
     }
     
     h2 {
-      color: #00A2e3;
+      color: @tingBlue;
       margin-top: 10px;
     }
   }
@@ -53,4 +54,39 @@ section {
     clear: both;
     display: table;
   }
+}
+
+.ting-button {
+  float: right;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -ms-border-radius: 20px;
+  border-radius: 20px;
+  padding: 8px 15px;
+  background: @tingBlue;
+  color: #FFF;
+  font-weight: normal;
+  font-size: 16px;
+  font-family: 'ProximaNovaRegular','Arial',sans-serif;
+  text-transform: none;
+  border: 0;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.ting-button:hover, .ting-button:focus {
+  background: #303030;
+}
+
+.ting-button.secondary {
+  margin-right: 30px;
+  float: right;
+  background: transparent;
+  color: @tingBlue;
+}
+
+.ting-button.secondary:hover, .ting-button.secondary:focus {
+  background-color: #e6e6e6;
+  color: @tingBlue;
+  text-decoration: underline;
 }

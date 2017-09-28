@@ -1,37 +1,43 @@
 .input-box {
     border: 1px solid #DEF6FF;
-    width: 35%;
     margin: 0 auto;
-    margin-bottom: 20px;
-    padding: 15px 20px;
+    margin-bottom: 0;
+    padding: 25px 20px;
     background-color: #E8F6FF;
-    padding: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     -ms-border-radius: 10px;
     border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    z-index: 2;
     overflow: auto;
+
+    .upload-label {
+        display: inline-block;
+        width: 60%;
+        text-align: left;
+    }
     
     label {
-        text-align: left;
+        display: block;
         font-size: 1.1em;
-        margin-top: 30px;
+        font-weight: bold;
         color: #00789c;
+        margin-top: -10px;
         border-bottom: 1px solid #A6C9EE;
-        text-align: center;
     }    
     
     .upload-description {
         margin-bottom: 10px;
         line-height: 1.8em;
-        font-size: 1.0em;
-        text-align: center;
+        font-size: 0.9em;
     }
     
     #bill-files {
-        display: block;
+        display: inline-block;
         margin: 0 auto;
-        width: 83%;
+        width: 40%;
         -moz-border-radius: 20px;
         -webkit-border-radius: 20px;
         -ms-border-radius: 20px;

@@ -5,6 +5,7 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title SplitTing App
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600")
         link(rel="stylesheet" href="styles/main.css")
     body
         header
@@ -14,12 +15,12 @@ html(lang="en")
             p From your dashboard in Ting.com, go to 'Billing History', select a 'Bill - Monthly Usage' and download the .csv files for each category. Just drag and drop the files into the uploader below and SplitTing will break it down and calculate the costs. The only two parts SplitTing can't calculate you'll need to add are the Devices and Taxes &amp; Regulatory fees in the form.
             p If you're worried about security and sharing your information in this form, not to worry. The calculations are all done on the browser without saving any data or sending anything across to any servers.
             p If any errors do pop up, or if you have any feature requests, you can email to #[a(href="mailto:split.ting.app@gmail.com") split.ting.app@gmail.com]
-        section
-            .input-box
-                label(for="bill-files" class="form-uploader-header") Upload your Ting Bill .csv's
-                .upload-description Upload up to three csv files from your bill.
-                input(type="file" id="bill-files" name="files[]" multiple)
-            
+        section.input-box
+            label(for="bill-files" class="form-uploader-header") Upload your Ting Bill .csv's
+            .upload-label
+                .upload-description Upload up to three csv files (minutes, messages, megabytes) from your bill.
+            input(type="file" id="bill-files" name="files[]" multiple)
+        section.summary-section           
             h3 Bill Summary
             .bill-table.bill-summary
                 .bill-row
@@ -82,7 +83,7 @@ html(lang="en")
             
         section.bill-split.hidden
             h2 Your Bill Splits Out To:
-            table#bill-split-table
+            table.bill-split-table
                 thead
                     tr
                         th Phone

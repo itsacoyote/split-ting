@@ -1,0 +1,28 @@
+.bill-split-table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 85%;
+
+    td, th {
+        border: 1px solid #aabdc8;
+        padding: 8px 5px;
+    }
+
+    th {
+        width: 200px;
+        text-align: left;
+        color: #05598a;
+    }
+
+    tr {
+        padding: 5px;
+    }
+
+    td {        
+        text-align: right;
+
+        &:first-child {
+            text-align: left;
+        }
+    }
+}
