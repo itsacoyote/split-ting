@@ -5,7 +5,7 @@ function Calculator() {
 Calculator.prototype.calcMinutes = function calcMinutes(file) {
     var fileReader = new FileReader(),
         self = this,
-        minutes = 0;
+        minutes = 0; 
 
     fileReader.readAsText(file);
 
