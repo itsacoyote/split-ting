@@ -20,6 +20,14 @@
   },
   "homepage": "https://github.com/itsacoyote/split-ting#readme",
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-better-rollup": "^1.1.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-imagemin": "^3.3.0",
+    "gulp-less": "^3.3.2",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-pug": "^3.3.0",
+    "rollup": "^0.50.0"
   }
 }
