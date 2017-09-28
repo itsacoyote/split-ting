@@ -1,0 +1,25 @@
+{
+  "name": "split-ting",
+  "version": "2.0.0",
+  "description": "A simple website to split and calculate your Ting bill.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsacoyote/split-ting.git"
+  },
+  "keywords": [
+    "ting"
+  ],
+  "author": "Sabrina Ferguson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsacoyote/split-ting/issues"
+  },
+  "homepage": "https://github.com/itsacoyote/split-ting#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
