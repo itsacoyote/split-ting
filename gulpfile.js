@@ -18,7 +18,7 @@ gulp.task('serve', function () {
 });
 
 gulp.task('images', function () {
-    return gulp.src('src/img/')
+    return gulp.src('src/img/*')
         .pipe($.imagemin())
         .pipe(gulp.dest('build/img/'))
         .pipe($.connect.reload());
