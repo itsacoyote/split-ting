@@ -1,1 +1,4 @@
-console.log('hello world!');
+(() => {
+    let foo = 'Hello World';
+    console.log(foo);
+})();

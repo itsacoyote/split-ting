@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({ lazy: true });
 var rollup = require('gulp-better-rollup');
+var babel = require('rollup-plugin-babel')
 var del = require('del');
 
 gulp.task('html', function () {
@@ -27,6 +28,10 @@ gulp.task('images', function () {
 gulp.task('styles', function () {
     return gulp.src('src/less/main.less')
         .pipe($.less())
+        .pipe($.autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
         .pipe(gulp.dest('build/styles/'))
         .pipe($.connect.reload());
 });
@@ -34,11 +39,12 @@ gulp.task('styles', function () {
 gulp.task('scripts', function () {
     return gulp.src('src/js/main.js')
         .pipe(rollup({
-            plugins: []
+            plugins: [
+                babel()
+            ]
         }, {
             file: 'build/js/main.js',
-            format: 'iife',
-            name: 'umd',
+            format: 'umd',
             sourcemap: true
         }))
         .pipe(gulp.dest('build/js'))
