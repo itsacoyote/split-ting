@@ -17,47 +17,47 @@ html(lang="en")
             p If any errors do pop up, or if you have any feature requests, you can email to #[a(href="mailto:split.ting.app@gmail.com") split.ting.app@gmail.com]
         section.input-box
             label(for="bill-files" class="form-uploader-header") Upload your Ting Bill .csv's
+            input(type="file" id="bill-files" name="files[]" multiple)
             .upload-label
                 .upload-description Upload up to three csv files (minutes, messages, megabytes) from your bill.
-            input(type="file" id="bill-files" name="files[]" multiple)
         section.summary-section           
             h3 Bill Summary
-            .bill-table.bill-summary
+            .bill-table#bill-summary
                 .bill-row
                     .label Minutes
                     .type
-                        span.minutes-type.hidden TYPE
+                        span#type-minutes.hidden TYPE
                     .description
-                        span.hidden #[span.bill-minutes ###] minutes used.
+                        span.hidden #[span#bill-minutes ###] minutes used.
                     .total
-                        span.minutes-total.hidden $###
+                        span#total-minutes.hidden $###
                 
                 .bill-row
                     .label Messages
                     .type
-                        span.messages-type.hidden TYPE
+                        span#type-messages.hidden TYPE
                     .description
-                        span.hidden #[span.bill-messages ###] messages used.
+                        span.hidden #[span#bill-messages ###] messages used.
                     .total
-                        span.messages-total.hidden $###
+                        span#total-messages.hidden $###
                 
                 .bill-row
                     .label Megabytes
                     .type
-                        span.megabytes-type.hidden TYPE
+                        span#type-megabytes.hidden TYPE
                     .description
-                        span.hidden #[span.bill-megabytes ###] megabytes used.
+                        span.hidden #[span#bill-megabytes ###] megabytes used.
                     .total
-                        span.megabytes-total.hidden $###
+                        span#total-megabytes.hidden $###
                 
                 .bill-row
                     .label Devices
                     .type
                     .description Device charges for the past month
                     .total 
-                        span.devices-total $#[input(name="additional-charge" id="additional-charge" type="text")]
+                        span#devices-total $#[input(name="additional-charge" id="additional-charge" type="text")]
                 
-                .bill-row.extras-row
+                .bill-row#extras-row
                     .label Extras
                     .type
                     .description
@@ -65,25 +65,25 @@ html(lang="en")
                     
             h3 Taxes &amp; Regulatory Fees
             
-            .bill-table.total-taxes
+            .bill-table#total-taxes
                 .bill-row
                     .description Federal, state and local taxes and regulatory fees.
                     .total $#[input(id="ting-fees" name="fees" type="text")]
                     
-            .bill-table.total-bill
+            .bill-table#bill-total
                 .bill-row
                     .total-labels
                         span Usages
                         span Taxes &amp; Regulatory Fees
                         span Total
-                    .total
+                    .total#total-values
             
             input(type="button" class="ting-button" id="calculate-button" value="Split the Bill!")
             input(type="button" class="ting-button secondary" id="reset-button" value="Reset Form")
             
         section.bill-split.hidden
             h2 Your Bill Splits Out To:
-            table.bill-split-table
+            table#bill-split-table
                 thead
                     tr
                         th Phone
