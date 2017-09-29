@@ -41,7 +41,7 @@ gulp.task('styles', function () {
             browsers: ['last 2 versions'],
             cascade: false
         }))
-        .pipe($.sourcemaps.write())
+        .pipe($.sourcemaps.write('../maps'))
         .pipe(gulp.dest('build/styles/'))
         .pipe($.connect.reload());
 });
@@ -73,7 +73,7 @@ gulp.task('scripts', function () {
             format: 'iife',
             sourcemap: true
         }))
-        .pipe($.sourcemaps.write())
+        .pipe($.sourcemaps.write('../maps'))
         .pipe(gulp.dest('build/js'))
         .pipe($.connect.reload());
 });
