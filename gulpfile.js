@@ -1,7 +1,10 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({ lazy: true });
 var rollup = require('gulp-better-rollup');
-var babel = require('rollup-plugin-babel')
+var babel = require('rollup-plugin-babel');
+var commonjs = require('rollup-plugin-commonjs');
+var resolve = require('rollup-plugin-node-resolve');
+var legacy = require('rollup-plugin-legacy');
 var del = require('del');
 
 gulp.task('html', function () {
@@ -26,27 +29,51 @@ gulp.task('images', function () {
 });
 
 gulp.task('styles', function () {
-    return gulp.src('src/less/main.less')
+    return gulp.src([
+        './node_modules/tippy.js/dist/tippy.css',
+        './src/less/main.less'
+    ])
+        .pipe($.plumber())
+        .pipe($.sourcemaps.init())
+        .pipe($.concat('main.css'))
         .pipe($.less())
         .pipe($.autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
         }))
+        .pipe($.sourcemaps.write())
         .pipe(gulp.dest('build/styles/'))
         .pipe($.connect.reload());
 });
 
 gulp.task('scripts', function () {
     return gulp.src('src/js/main.js')
+        .pipe($.plumber())
+        .pipe($.sourcemaps.init())
         .pipe(rollup({
             plugins: [
-                babel()
+                resolve({
+                    jsnext: true,
+                    main: true,
+                    browser: true
+                }),
+                commonjs(),
+                legacy({
+                    './node_modules/blissfuljs/bliss.js': {
+                        '$': '$',
+                        '$$': '$$'
+                    }
+                }),
+                babel({
+                    exclude: 'node_modules/**'
+                })
             ]
         }, {
             file: 'build/js/main.js',
-            format: 'umd',
+            format: 'iife',
             sourcemap: true
         }))
+        .pipe($.sourcemaps.write())
         .pipe(gulp.dest('build/js'))
         .pipe($.connect.reload());
 });
